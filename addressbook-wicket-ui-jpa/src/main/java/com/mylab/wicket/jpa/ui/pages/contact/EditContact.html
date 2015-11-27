@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket</title>
+<style>
+.table {
+	width: 100%;
+	border-spacing: 0px;
+	padding: 3px;
+	text-align: center;
+}
+
+#ft {
+	text-align: center
+}
+</style>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1>
+				<wicket:message key="addressbook">Address Book</wicket:message>
+			</h1>
+		</div>
+	</div>
+	<div id="bd">
+		<h3>
+			<wicket:message key="editcontactdetails">Edit Contact Details</wicket:message>
+		</h3>
+		<font color="red"><span wicket:id="feedback">message</span></font>
+
+		<p>
+		<form wicket:id="editContactForm">
+			<fieldset>
+				<table>
+					<tr>
+						<td align="right"><wicket:message key="firstname">First Name:*</wicket:message></td>
+						<td><input wicket:id="firstName" type="text" /></td>
+					</tr>
+
+					<tr>
+						<td align="right"><wicket:message key="lastname">Last Name:*</wicket:message></td>
+						<td><input wicket:id="lastName" type="text" /></td>
+					</tr>
+
+					<tr>
+						<td align="right"><wicket:message key="dateofbirth">Date Of Birth:</wicket:message></td>
+						<td><input type="text" wicket:id="dateOfBirth" /></td>
+					</tr>
+					<tr>
+						<td align="right"><wicket:message key="mailaddress">Mail Address:*</wicket:message></td>
+						<td><input wicket:id="mailAddress" type="text" /></td>
+					</tr>
+				</table>
+			</fieldset>
+			<br> <input type="submit" name="Submit"
+				wicket:message="value:save" />
+		</form>
+
+		<br>
+		<h3>
+			<wicket:message key="editcontactaddresses">Edit Contact Addresses</wicket:message>
+		</h3>
+		<p>
+		<table>
+			<tr>
+				<td bgcolor="lightgrey"><b><wicket:message key="street">Street</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="zipcode">Zip Code</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="city">City</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="country">Country</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message
+							key="workaddress">Work Address</wicket:message></b></td>
+				<td bgcolor="lightgrey"></td>
+				<td bgcolor="lightgrey"></td>
+			</tr>
+
+			<tr wicket:id="addressList">
+				<form wicket:id="form">
+
+					<td><input wicket:id="street" type="text" /></td>
+					<td><input wicket:id="zipcode" type="text"></td>
+					<td><input wicket:id="city" type="text"></td>
+					<td><select wicket:id="country" style="width: 300px;"></select></td>
+					<td><input wicket:id="isWorkAddress" type="checkbox" /></td>
+					<td><input type="submit" name="Submit"
+						wicket:message="value:save" /></td>
+				</form>
+				<td><input wicket:id="removeAddress" type="submit"
+					wicket:message="value:remove" /></td>
+			</tr>
+		</table>
+		<span wicket:id="pageNavigator"></span>
+		<div class="row">
+			<div class="span12">
+				<p>
+					City currently selected: <strong><span wicket:id="city0"></span>
+					</strong>
+				</p>
+				<form wicket:id="single0">
+					<select wicket:id="city0" style="width: 300px;"></select>
+					<div class="form-actions">
+						<button type="submit" class="btn">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div> 
+		<br> <br> 
+		<input wicket:id="addAddressLink" type="submit" wicket:message="value:add" />
+		<input wicket:id="backLink" type="submit" wicket:message="value:back" />
+	</div>
+	<div id="ft">
+		<br> <br> <span wicket:id="userInfo">message</span>
+	</div>
+</body>
+</html>

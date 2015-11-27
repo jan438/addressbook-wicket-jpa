@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket</title>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1>
+				<wicket:message key="addressbook">Address Book</wicket:message>
+			</h1>
+		</div>
+	</div>
+	<div id="bd">
+
+		<p align="right">
+			<input wicket:id="registerUser" type="submit"
+				wicket:message="value:register" />
+		</p>
+
+		<h3>
+			<wicket:message key="signin">Sign In</wicket:message>
+		</h3>
+
+		<font color="red"><span wicket:id="feedback"></span></font>
+
+		<form wicket:id="signInForm">
+
+			<div>
+				<wicket:message key="use.locale">Use locale:</wicket:message>
+				<select wicket:id="localeSelect"></select>
+				<wicket:link>
+					<img src="flag.gif" />
+				</wicket:link>
+				<a href="#" wicket:id="defaultLocaleLink">[<wicket:message
+						key="default" />]
+				</a>
+			</div>
+
+			<div style="font-family: helvetica" wicket:id="captcha"></div>
+			<a wicket:id="checkKittens"><wicket:message key="checkkittens">Check kittens</wicket:message></a>
+
+			<fieldset>
+				<table>
+					<tr>
+						<td align="right"><wicket:message key="username">Username:</wicket:message></td>
+						<td><input wicket:id="username" type="text"
+							value="foo@goo.moo" size="30" /></td>
+					</tr>
+					<tr>
+						<td align="right"><wicket:message key="password">Password:</wicket:message></td>
+						<td><input wicket:id="password" type="password"
+							value="password" size="30" /></td>
+					</tr>
+
+				</table>
+			</fieldset>
+			<input type="submit" wicket:message="value:signin" />
+		</form>
+
+	</div>
+	<div id="ft"></div>
+</body>
+</html>

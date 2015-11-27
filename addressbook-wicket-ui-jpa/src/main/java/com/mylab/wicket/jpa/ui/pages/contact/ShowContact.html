@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket</title>
+<style>
+.table {
+	width: 100%;
+	border-spacing: 0px;
+	padding: 4px;
+	text-align: center;
+}
+
+#ft {
+	text-align: center
+}
+</style>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1><wicket:message key="addressbook">Address Book</wicket:message></h1>
+		</div>
+	</div>
+	<div id="bd">
+		<h3>Contact Details</h3>
+		<p>
+		<table>
+
+			<tr>
+				<td bgcolor="lightgrey"><b><wicket:message key="firstname">First Name</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="lastname">Last Name</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message
+							key="dateofbirth">Date Of Birth</wicket:message></b></td>
+
+			</tr>
+
+			<tr>
+				<td><span wicket:id="firstName">message</span></td>
+				<td><span wicket:id="lastName">message</span></td>
+				<td><span wicket:id="dateOfBirth">message</span></td>
+
+			</tr>
+
+		</table>
+
+		<br>
+		<h3>Contact Addresses</h3>
+
+		<p>
+		<table>
+
+			<tr>
+				<td bgcolor="lightgrey"><b>Street</b></td>
+				<td bgcolor="lightgrey"><b>Zip Code</b></td>
+				<td bgcolor="lightgrey"><b>City</b></td>
+				<td bgcolor="lightgrey"><b>Country</b></td>
+				<td bgcolor="lightgrey"><b>Work Address</b></td>
+
+			</tr>
+
+			<tr wicket:id="addressList">
+				<td><span wicket:id="street">message</span></td>
+				<td><span wicket:id="zipcode">message</span></td>
+				<td><span wicket:id="city">message</span></td>
+				<td><span wicket:id="country">message</span></td>
+				<td><span wicket:id="isWorkAddress">message</span></td>
+
+			</tr>
+
+		</table>
+		<span wicket:id="pageNavigator"></span><br> <br> <input
+			wicket:id="backLink" type="submit" value="Back to Contact List" />
+	</div>
+	<div id="ft"></div>
+</body>
+</html>

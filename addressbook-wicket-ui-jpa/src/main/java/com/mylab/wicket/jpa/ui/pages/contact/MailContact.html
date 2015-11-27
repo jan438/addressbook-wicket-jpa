@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket</title>
+<style>
+.table {
+	border-collapse: separate;
+	border-spacing: 3px;
+}
+.nospam {
+	display : none;
+}
+#ft {
+	text-align: center
+}
+</style>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1>
+				<wicket:message key="addressbook">Address Book</wicket:message>
+			</h1>
+		</div>
+	</div>
+	<div id="bd">
+		<h3>Mail</h3>
+		<font color="red"><span wicket:id="feedback"></span></font>
+		<p>
+		<form wicket:id="mailContactForm">
+			<span wicket:id="comment_text">Add your comment here:</span>			<p>
+				<textarea wicket:id="text">This is a comment</textarea>
+			</p>
+			<input type="text" wicket:id="comment" class="nospam" onfocus="getElementById('formsubmit').focus();" /> 
+			<br /> 
+			<input type="submit" wicket:message="value:mail" /> 
+			<input wicket:id="backLink" type="submit" wicket:message="value:cancel" />
+		</form>
+		<span wicket:id="comments" id="comments"> <span
+			wicket:id="date">1/1/2004</span> <span wicket:id="text">Comment
+				text goes here.</span>
+		</span>
+		<wicket:remove>
+			<p>
+				1/2/2004<br /> More comment text here.
+			</p>
+		</wicket:remove>
+	</div>
+	<div id="ft">
+		<br> <br> <span wicket:id="userInfo">message</span>
+	</div>
+</body>
+</html>

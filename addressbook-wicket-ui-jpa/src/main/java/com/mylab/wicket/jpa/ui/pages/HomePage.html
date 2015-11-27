@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket, HSQL and Hibernate</title>
+<style>
+.table {
+	width: 100%;
+	border-spacing: 0px;
+	padding: 4px;
+	text-align: center;
+}
+
+#ft {
+	text-align: center
+}
+</style>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1>
+				<wicket:message key="addressbook">Address Book</wicket:message>
+			</h1>
+		</div>
+	</div>
+	<div id="bd">
+		<p align="right">
+			<input wicket:id="editUsers" type="submit"
+				wicket:message="value:editusers" /> <input wicket:id="signOut"
+				type="submit" wicket:message="value:signout" />
+		</p>
+		<h3>... with Apache Wicket</h3>
+		<font color="red"><span wicket:id="feedback">message</span></font>
+
+		<p>
+		<table>
+
+			<tr>
+				<td bgcolor="lightgrey"><b><wicket:message key="firstname">First Name</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="lastname">Last Name</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message
+							key="dateofbirth">Date Of Birth</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="mailaddress">Mail Address</wicket:message></b></td>
+				<td bgcolor="lightgrey"></td>
+				<td bgcolor="lightgrey"></td>
+				<td bgcolor="lightgrey"></td>
+				<td bgcolor="lightgrey"></td>
+			</tr>
+
+			<tr wicket:id="contactList" class="mark">
+				<td><span wicket:id="firstName">message</span></td>
+				<td><span wicket:id="lastName">message</span></td>
+				<td><span wicket:id="dateOfBirth">message</span></td>
+				<td><span wicket:id="mailAddress">message</span></td>
+				<td><input wicket:id="showContact" type="submit"
+					wicket:message="value:view" /></td>
+				<td><input wicket:id="editContact" type="submit"
+					wicket:message="value:edit" /></td>
+				<td><input wicket:id="mailContact" type="submit"
+					wicket:message="value:mail" /></td>
+				<td><input wicket:id="removeContact" type="submit"
+					wicket:message="value:remove" /></td>
+				<td><div wicket:id="modalWindow"></div></td>
+			</tr>
+
+		</table>
+
+		<span wicket:id="pageNavigator"></span>
+
+		<p>
+			<input wicket:id="create_new_contact_link" type="submit"
+				wicket:message="value:createnewcontact" /><br> <br>
+
+		</p>
+	</div>
+	<div id="ft">
+		<br> <br> <span wicket:id="userInfo">message</span>
+	</div>
+</body>
+</html>

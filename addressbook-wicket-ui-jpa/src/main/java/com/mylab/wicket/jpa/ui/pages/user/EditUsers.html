@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket</title>
+<style>
+.table {
+	border-collapse: separate;
+	border-spacing: 0px;
+	text-align: center;
+	width: 100%;
+}
+
+#ft {
+	text-align: center
+}
+</style>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1>
+				<wicket:message key="addressbook">Address Book</wicket:message>
+			</h1>
+		</div>
+	</div>
+	<div id="bd">
+
+		<h3>
+			<wicket:message key="editusers">Edit Users</wicket:message>
+		</h3>
+
+		<font color="red"><span wicket:id="feedback"></span></font>
+
+		<table>
+
+			<tr>
+				<td width="35%" bgcolor="lightgrey"><b><wicket:message
+							key="username">Username</wicket:message></b></td>
+				<td width="35%" bgcolor="lightgrey"><b><wicket:message
+							key="password">Password</wicket:message></b></td>
+				<td width="10%" bgcolor="lightgrey"><b><wicket:message
+							key="role">Role</wicket:message></b></td>
+				<td width="10%" bgcolor="lightgrey"></td>
+				<td width="10%" bgcolor="lightgrey"></td>
+			</tr>
+
+			<tr wicket:id="userList">
+				<form wicket:id="form">
+
+					<td width="35%"><input wicket:id="username" type="text" /></td>
+					<td width="35%"><input wicket:id="password" type="text"></td>
+					<td width="10%"><select wicket:id="role">
+							<option>value</option>
+							<option>value</option>
+					</select></td>
+					<td width="10%"><input type="submit"
+						wicket:message="value:save" /></td>
+				</form>
+				<td width="10%"><input wicket:id="removeUser" type="submit"
+					wicket:message="value:remove" /></td>
+
+			</tr>
+
+		</table>
+		<span wicket:id="pageNavigator"></span><br> <br> <input
+			wicket:id="backLink" type="submit" wicket:message="value:back" />
+	</div>
+	<div id="ft">
+		<br> <br> <span wicket:id="userInfo">message</span>
+	</div>
+</body>
+</html>

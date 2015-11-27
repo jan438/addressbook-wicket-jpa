@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<style>
+.table {
+	width: 100%;
+	border-spacing: 0px;
+	padding: 4px;
+	text-align: center;
+}
+
+#ft {
+	text-align: center
+}
+</style>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+
+	<div id="bd">
+		<h3><wicket:message key="contactdetails">Contact Details</wicket:message></h3>
+		<p>
+		<table>
+
+			<tr>
+				<td bgcolor="lightgrey"><b><wicket:message key="firstname">First Name</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="lastname">Last Name</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message
+							key="dateofbirth">Date Of Birth</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="mailaddress">Mail Address</wicket:message></b></td>
+			</tr>
+
+			<tr>
+				<td><span wicket:id="firstName">message</span></td>
+				<td><span wicket:id="lastName">message</span></td>
+				<td><span wicket:id="dateOfBirth">message</span></td>
+				<td><span wicket:id="mailAddress">message</span></td>
+			</tr>
+
+		</table>
+
+		<br>
+		<h3><wicket:message key="contactaddresses">Contact Addresses</wicket:message></h3>
+
+		<p>
+		<table>
+
+			<tr>
+				<td bgcolor="lightgrey"><b><wicket:message key="street">Street</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="zipcode">Zip Code</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="city">City</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="country">Country</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message key="workaddress">Work Address</wicket:message></b></td>
+
+			</tr>
+
+			<tr wicket:id="addressList">
+				<td><span wicket:id="street">message</span></td>
+				<td><span wicket:id="zipcode">message</span></td>
+				<td><span wicket:id="city">message</span></td>
+				<td><span wicket:id="country">message</span></td>
+				<td><span wicket:id="isWorkAddress">message</span></td>
+
+			</tr>
+
+		</table>
+		<span wicket:id="pageNavigator"></span><br> <br> <input
+			wicket:id="backLink" type="submit" wicket:message="value:close" />
+	</div>
+
+</body>
+</html>
