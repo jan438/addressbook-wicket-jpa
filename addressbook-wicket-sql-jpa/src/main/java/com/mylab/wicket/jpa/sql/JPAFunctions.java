@@ -238,25 +238,6 @@ public class JPAFunctions {
 		em.close();
 	}
 
-	@PersistenceContext
-	public static void query_name_address(String username) {
-		EntityManagerFactory entityManagerFactory = Persistence
-				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
-		@SuppressWarnings("unchecked")
-		List<AddressBookUser> users = em.createNamedQuery("findAllUsersWithName").setParameter("username", username)
-				.getResultList();
-		if (users != null) {
-			AddressBookUser user = users.get(0);
-			System.out.println("user with name " + user.getUsername() + " found");
-		} else {
-			System.out.println("user with name " + username + " not found");
-		}
-		em.getTransaction().commit();
-		em.close();
-	}
-
 	public static void main(String[] args) {
 		// remove_user(1234);
 		// AddressBookUser user1 = new AddressBookUser();
