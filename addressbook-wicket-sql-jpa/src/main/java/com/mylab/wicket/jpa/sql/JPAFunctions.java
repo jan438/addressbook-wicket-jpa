@@ -222,22 +222,6 @@ public class JPAFunctions {
 		em.close();
 	}
 
-	@PersistenceContext
-	public static void query_id_address(long id) {
-		EntityManagerFactory entityManagerFactory = Persistence
-				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
-		EntityManager em = entityManagerFactory.createEntityManager();
-		em.getTransaction().begin();
-		AddressBookUser user = em.find(AddressBookUser.class, id);
-		if (user != null) {
-			System.out.println("user with id " + id + " name " + user.getUsername());
-		} else {
-			System.out.println("user with id " + id + " not found");
-		}
-		em.getTransaction().commit();
-		em.close();
-	}
-
 	public static void main(String[] args) {
 		// remove_user(1234);
 		// AddressBookUser user1 = new AddressBookUser();
