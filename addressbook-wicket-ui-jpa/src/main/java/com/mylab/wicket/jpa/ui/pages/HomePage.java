@@ -60,7 +60,6 @@ public class HomePage extends WebPage {
 		add(new EditUsersLink("editUsers", EditUsers.class));
 
 		// List all Contacts
-		final Contact contact = new Contact();
 		final List<Contact> contacts = JPAFunctions.getContacts();
 		final PageableListView<Contact> listView;
 
