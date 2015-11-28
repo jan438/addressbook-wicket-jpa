@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.link.Link;
 
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.Contact;
-import com.mylab.wicket.jpa.ui.JPAFunctions;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;

@@ -18,7 +18,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
-import com.mylab.wicket.jpa.ui.JPAFunctions;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignIn;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.contact.CreateNewContact;

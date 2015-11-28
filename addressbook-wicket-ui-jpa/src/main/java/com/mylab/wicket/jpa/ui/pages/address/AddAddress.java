@@ -22,7 +22,7 @@ import org.apache.wicket.validation.validator.StringValidator;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
-import com.mylab.wicket.jpa.ui.JPAFunctions;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.contact.EditContact;
 import com.mylab.wicket.jpa.ui.pages.select2.ChoiceProvider;

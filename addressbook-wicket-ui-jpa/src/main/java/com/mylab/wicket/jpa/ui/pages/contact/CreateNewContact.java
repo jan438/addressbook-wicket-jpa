@@ -15,7 +15,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.StringValidator;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
-import com.mylab.wicket.jpa.ui.JPAFunctions;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 
 /**

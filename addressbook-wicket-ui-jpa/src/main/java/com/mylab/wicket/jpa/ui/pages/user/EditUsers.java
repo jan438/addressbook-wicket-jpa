@@ -17,7 +17,7 @@ import org.apache.wicket.model.PropertyModel;
 
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
-import com.mylab.wicket.jpa.ui.JPAFunctions;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 

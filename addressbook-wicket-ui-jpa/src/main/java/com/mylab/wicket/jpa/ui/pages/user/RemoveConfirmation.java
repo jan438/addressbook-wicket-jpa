@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.link.Link;
 
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.Contact;
-import com.mylab.wicket.jpa.ui.JPAFunctions;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 import com.mylab.wicket.jpa.ui.pages.contact.EditContact;
 

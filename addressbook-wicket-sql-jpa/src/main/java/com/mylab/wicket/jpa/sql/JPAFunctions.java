@@ -1,4 +1,4 @@
-package com.mylab.wicket.jpa.ui;
+package com.mylab.wicket.jpa.sql;
 
 import java.util.Iterator;
 import java.util.List;
@@ -35,17 +35,8 @@ public class JPAFunctions {
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
-		Query q = em.createNativeQuery("select nextval('addressbookuser_id_seq')");
-		long result = (long) q.getSingleResult();
-		if (result > 0) {
-			user.setId(result);
-			try {
-				em.persist(user);
-				em.getTransaction().commit();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
+		em.persist(user);
+		em.getTransaction().commit();
 		em.close();
 	}
 
