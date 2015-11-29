@@ -30,7 +30,7 @@ public class JPAFunctions {
 	}
 
 	@PersistenceContext
-	public static void persist_user(AddressBookUser user) {
+	public static void persist_newuser(AddressBookUser user) {
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
@@ -39,9 +39,23 @@ public class JPAFunctions {
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	@PersistenceContext
+	public static void persist_existinguser(AddressBookUser dbuser) {
+		EntityManagerFactory entityManagerFactory = Persistence
+				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		AddressBookUser user = em.find(AddressBookUser.class, dbuser.getId());
+		user.setPassword(dbuser.getPassword());
+		user.setRole(dbuser.getRole());
+		em.getTransaction().commit();
+		em.close();
+	}
 
 	@PersistenceContext
-	public static void query_id_user(long id) {
+	public static boolean query_id_user(long id) {
+		boolean success = false;
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
@@ -49,15 +63,18 @@ public class JPAFunctions {
 		AddressBookUser user = em.find(AddressBookUser.class, id);
 		if (user != null) {
 			System.out.println("user with id " + id + " name " + user.getUsername());
+			success = true;
 		} else {
 			System.out.println("user with id " + id + " not found");
 		}
 		em.getTransaction().commit();
 		em.close();
+		return success;
 	}
 
 	@PersistenceContext
-	public static void query_name_user(String username) {
+	public static boolean query_name_user(String username) {
+		boolean success = false;
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
@@ -68,11 +85,13 @@ public class JPAFunctions {
 		if ((users != null) && (!users.isEmpty())) {
 			AddressBookUser user = users.get(0);
 			System.out.println("user with name " + user.getUsername() + " found");
+			success = true;
 		} else {
 			System.out.println("user with name " + username + " not found");
 		}
 		em.getTransaction().commit();
 		em.close();
+		return success;
 	}
 	
 	@PersistenceContext
