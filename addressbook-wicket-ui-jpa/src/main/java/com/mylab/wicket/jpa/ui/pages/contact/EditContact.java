@@ -39,7 +39,7 @@ public class EditContact extends WebPage {
 	private static Session session;
 	@SuppressWarnings("unused")
 	private City city0 = City.Assendelft;
-	
+
 	public EditContact(final Contact contact) {
 
 		session = getSession();
@@ -60,7 +60,8 @@ public class EditContact extends WebPage {
 
 		// Addresses list view
 		List<Address> addresses = new ArrayList<Address>();
-		addresses.addAll(contact.getAddresses());
+
+		addresses.addAll(JPAFunctions.getAddresses(contact.getId()));
 
 		final PageableListView<Address> listView;
 
@@ -120,7 +121,7 @@ public class EditContact extends WebPage {
 				addressItem.add(form);
 			}
 		});
-		
+
 		// single-select no minimum example
 		add(new Label("city0", new PropertyModel<>(this, "city0")));
 
@@ -140,7 +141,7 @@ public class EditContact extends WebPage {
 	protected String getUserInfo(final Session session) {
 		final AddressBookUser user = ((SignInSession) session).getUser();
 		if (null != user) {
-			return "User: " + user.getUsername() + " || Role: "+ user.getRole();
+			return "User: " + user.getUsername() + " || Role: " + user.getRole();
 		} else {
 			return "No AddressBookUser data available.";
 		}
@@ -266,7 +267,7 @@ public class EditContact extends WebPage {
 					new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
 			dateOfBirthField.add(new BirthDayValidator());
 			add(dateOfBirthField);
-			
+
 			mailAddressField = new TextField<String>("mailAddress");
 			mailAddressField.setRequired(true);
 			mailAddressField.add(StringValidator.maximumLength(30));

@@ -162,7 +162,7 @@ public class JPAFunctions {
 		em.close();
 		return success;
 	}
-	
+
 	@PersistenceContext
 	public static boolean persist_existingcontact(Contact dbcontact) {
 		boolean success = false;
@@ -182,7 +182,6 @@ public class JPAFunctions {
 		em.close();
 		return success;
 	}
-
 
 	@PersistenceContext
 	public static void query_id_contact(long id) {
@@ -271,6 +270,20 @@ public class JPAFunctions {
 		em.persist(contact);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	@PersistenceContext
+	public static Set<Address> getAddresses(long id) {
+		EntityManagerFactory entityManagerFactory = Persistence
+				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getEntityManagerFactory().getCache().evictAll();
+		em.getTransaction().begin();
+		Contact contact = em.find(Contact.class, id);
+		Set<Address> addresses = contact.getAddresses();
+		em.getTransaction().commit();
+		em.close();
+		return addresses;
 	}
 
 	public static void main(String[] args) {
