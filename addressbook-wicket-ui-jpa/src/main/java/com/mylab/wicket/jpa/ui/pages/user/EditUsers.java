@@ -189,9 +189,7 @@ public class EditUsers extends WebPage {
 			final AddressBookUser u = getModelObject();
 			boolean success = JPAFunctions.query_name_user(u.getUsername());
 			if (!success) JPAFunctions.persist_newuser(u);
-			else {
-				JPAFunctions.persist_existinguser(u);
-			}
+			else JPAFunctions.persist_existinguser(u);
 
 			// A message stored with getSession().info("...") gets automatically
 			// picked up by the target page's feedback panel:

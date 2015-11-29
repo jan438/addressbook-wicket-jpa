@@ -39,7 +39,7 @@ public class JPAFunctions {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	@PersistenceContext
 	public static void persist_existinguser(AddressBookUser dbuser) {
 		EntityManagerFactory entityManagerFactory = Persistence
@@ -93,7 +93,7 @@ public class JPAFunctions {
 		em.close();
 		return success;
 	}
-	
+
 	@PersistenceContext
 	public static List<AddressBookUser> getAllUsers() {
 		EntityManagerFactory entityManagerFactory = Persistence
@@ -150,22 +150,39 @@ public class JPAFunctions {
 	}
 
 	@PersistenceContext
-	public static boolean persist_contact(Contact contact) {
+	public static boolean persist_newcontact(Contact contact) {
 		boolean success = false;
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
-		try {
-			em.persist(contact);
-			em.getTransaction().commit();
-			success = true;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		em.persist(contact);
+		em.getTransaction().commit();
+		success = true;
 		em.close();
 		return success;
 	}
+	
+	@PersistenceContext
+	public static boolean persist_existingcontact(Contact dbcontact) {
+		boolean success = false;
+		EntityManagerFactory entityManagerFactory = Persistence
+				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		Contact contact = em.find(Contact.class, dbcontact.getId());
+		contact.setAddresses(dbcontact.getAddresses());
+		contact.setDateOfBirth(dbcontact.getDateOfBirth());
+		contact.setMailAddress(dbcontact.getMailAddress());
+		contact.setFirstName(dbcontact.getFirstName());
+		contact.setLastName(dbcontact.getLastName());
+		em.persist(contact);
+		em.getTransaction().commit();
+		success = true;
+		em.close();
+		return success;
+	}
+
 
 	@PersistenceContext
 	public static void query_id_contact(long id) {
@@ -250,12 +267,10 @@ public class JPAFunctions {
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
-		try {
-			em.persist(address);
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		em.persist(address);
+		Contact contact = em.find(Contact.class, address.getContact().getId());
+		em.persist(contact);
+		em.getTransaction().commit();
 		em.close();
 	}
 

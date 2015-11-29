@@ -279,7 +279,7 @@ public class EditContact extends WebPage {
 			final Contact contact = getModelObject();
 			Date birthday = dateOfBirthField.getConvertedInput();
 			contact.setDateOfBirth(birthday);
-			JPAFunctions.persist_contact(contact);
+			JPAFunctions.persist_existingcontact(contact);
 			String language = session.getLocale().getLanguage();
 			switch (language) {
 			case "nl":

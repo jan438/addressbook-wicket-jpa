@@ -97,7 +97,7 @@ public class CreateNewContact extends WebPage {
 
 			Date birthday = dateOfBirthField.getConvertedInput();
 			contact.setDateOfBirth(birthday);
-			boolean success = JPAFunctions.persist_contact(contact);
+			boolean success = JPAFunctions.persist_newcontact(contact);
 
 			String language = getSession().getLocale().getLanguage();
 			if (success) {
