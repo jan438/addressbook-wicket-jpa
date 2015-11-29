@@ -237,7 +237,6 @@ public class JPAFunctions {
 		return contacts;
 	}
 
-	@SuppressWarnings("unused")
 	@PersistenceContext
 	public static boolean remove_address(long id) {
 		boolean success = false;
@@ -246,16 +245,16 @@ public class JPAFunctions {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
 		Address address = em.find(Address.class, id);
-		Contact contact = address.getContact();
-		contact.removeAddress(address);
 		if (address != null) {
+			Contact contact = address.getContact();
+			contact.removeAddress(address);
+			em.persist(contact);
 			em.remove(address);
 			success = true;
 			System.out.println("address with id " + id + " removed");
 		} else {
 			System.out.println("address with id " + id + " was not found");
 		}
-		em.persist(contact);
 		em.getTransaction().commit();
 		em.close();
 		return success;
