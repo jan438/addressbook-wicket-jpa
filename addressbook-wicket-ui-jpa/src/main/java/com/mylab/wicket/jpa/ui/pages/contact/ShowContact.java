@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.Contact;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 
 public class ShowContact extends WebPage {
@@ -32,7 +33,8 @@ public class ShowContact extends WebPage {
 
 		// List the contact's addresses
 		List<Address> addresses = new ArrayList<Address>();
-		addresses.addAll(contact.getAddresses());
+
+		addresses.addAll(JPAFunctions.getAddresses(contact.getId()));
 
 		final PageableListView<Address> listView;
 
