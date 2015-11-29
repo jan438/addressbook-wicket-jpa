@@ -74,6 +74,24 @@ public class JPAFunctions {
 		em.getTransaction().commit();
 		em.close();
 	}
+	
+	@PersistenceContext
+	public static List<AddressBookUser> getAllUsers() {
+		EntityManagerFactory entityManagerFactory = Persistence
+				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		@SuppressWarnings("unchecked")
+		List<AddressBookUser> users = em.createNamedQuery("findAllUsers").getResultList();
+		if (users != null) {
+			System.out.println(users.toString());
+		} else {
+			System.out.println("no users found");
+		}
+		em.getTransaction().commit();
+		em.close();
+		return users;
+	}
 
 	@PersistenceContext
 	public static List<AddressBookUser> getUsers(String s) {

@@ -6,10 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "addressbookuser", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }) )
-@NamedQuery(
-        name="findAllUsersWithName",
-        query="SELECT u FROM AddressBookUser u WHERE u.username LIKE :username"
-)
+@NamedQueries({
+		@NamedQuery(name = "findAllUsersWithName", query = "SELECT u FROM AddressBookUser u WHERE u.username LIKE :username"),
+		@NamedQuery(name = "findAllUsers", query = "SELECT u FROM AddressBookUser u")
+
+})
 public class AddressBookUser implements Serializable {
 
 	/**

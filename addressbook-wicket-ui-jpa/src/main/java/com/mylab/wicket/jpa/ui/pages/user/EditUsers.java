@@ -43,9 +43,8 @@ public class EditUsers extends WebPage {
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 		add(feedbackPanel);
 
-		// Addresses list view
 		List<AddressBookUser> userList = new ArrayList<AddressBookUser>();
-		userList.addAll(JPAFunctions.getUsers("*"));
+		userList.addAll(JPAFunctions.getAllUsers());
 
 		final PageableListView<AddressBookUser> listView;
 
