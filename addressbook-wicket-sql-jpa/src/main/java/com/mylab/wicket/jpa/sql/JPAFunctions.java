@@ -65,7 +65,7 @@ public class JPAFunctions {
 		@SuppressWarnings("unchecked")
 		List<AddressBookUser> users = em.createNamedQuery("findAllUsersWithName").setParameter("username", username)
 				.getResultList();
-		if (users != null) {
+		if ((users != null) && (!users.isEmpty())) {
 			AddressBookUser user = users.get(0);
 			System.out.println("user with name " + user.getUsername() + " found");
 		} else {
