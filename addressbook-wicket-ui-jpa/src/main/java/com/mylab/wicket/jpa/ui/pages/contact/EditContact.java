@@ -21,6 +21,8 @@ import org.apache.wicket.validation.IValidationError;
 import org.apache.wicket.validation.Validatable;
 import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
+
+import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
@@ -246,7 +248,7 @@ public class EditContact extends WebPage {
 
 		private TextField<String> firstNameField;
 		private TextField<String> lastNameField;
-		private JQueryDateField dateOfBirthField;
+		private DatePicker dateOfBirthField;
 		private TextField<String> mailAddressField;
 
 		public EditContactForm(final String id, IModel<Contact> contactModel) {
@@ -263,9 +265,11 @@ public class EditContact extends WebPage {
 			lastNameField.add(StringValidator.maximumLength(30));
 			add(lastNameField);
 
-			dateOfBirthField = new JQueryDateField("dateOfBirth",
-					new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
+			dateOfBirthField = new DatePicker("dateOfBirth",
+			new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
+
 			dateOfBirthField.add(new BirthDayValidator());
+
 			add(dateOfBirthField);
 
 			mailAddressField = new TextField<String>("mailAddress");
