@@ -1,7 +1,7 @@
 package com.mylab.wicket.jpa.ui.pages.contact;
 
 import java.util.Date;
-
+import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
 import org.apache.wicket.markup.html.WebPage;
@@ -59,7 +59,7 @@ public class CreateNewContact extends WebPage {
 	@SuppressWarnings("serial")
 	public static final class CreateContactForm extends Form<Contact> {
 
-		private JQueryDateField dateOfBirthField;
+		private DatePicker dateOfBirthField;
 
 		public CreateContactForm(final String id, IModel<Contact> contactModel) {
 			super(id, contactModel);
@@ -75,8 +75,8 @@ public class CreateNewContact extends WebPage {
 			lastNameField.add(StringValidator.maximumLength(30));
 			add(lastNameField);
 
-			dateOfBirthField = new JQueryDateField("dateOfBirth",
-					new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
+			dateOfBirthField = new DatePicker("dateOfBirth",
+			new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
 
 			dateOfBirthField.add(new BirthDayValidator());
 
