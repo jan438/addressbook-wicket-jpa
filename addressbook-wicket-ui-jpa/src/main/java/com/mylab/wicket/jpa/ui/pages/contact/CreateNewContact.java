@@ -1,6 +1,8 @@
 package com.mylab.wicket.jpa.ui.pages.contact;
 
 import java.util.Date;
+
+import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
@@ -11,6 +13,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.StringValidator;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
@@ -86,6 +89,8 @@ public class CreateNewContact extends WebPage {
 			mailAddressField.setRequired(true);
 			mailAddressField.add(StringValidator.maximumLength(30));
 			add(mailAddressField);
+
+			add(new Button("createcontactbutton", Model.of("Submit")));
 
 			add(ShowContact.backLink("backLink"));
 		}
