@@ -16,12 +16,14 @@ import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.IValidationError;
 import org.apache.wicket.validation.Validatable;
 import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
 
+import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
@@ -276,6 +278,9 @@ public class EditContact extends WebPage {
 			mailAddressField.setRequired(true);
 			mailAddressField.add(StringValidator.maximumLength(30));
 			add(mailAddressField);
+			
+			add(new Button("editcontactbutton", Model.of("Submit")));
+
 		}
 
 		@Override
