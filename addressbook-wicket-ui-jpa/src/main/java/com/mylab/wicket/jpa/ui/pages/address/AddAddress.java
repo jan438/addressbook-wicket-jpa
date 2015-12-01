@@ -19,6 +19,8 @@ import org.apache.wicket.validation.IValidationError;
 import org.apache.wicket.validation.Validatable;
 import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
+
+import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
@@ -257,6 +259,8 @@ public class AddAddress extends WebPage {
 			CheckBox isWorkAddressCB = new CheckBox("isWorkAddress", new Model<Boolean>());
 			isWorkAddressCB.setDefaultModel(new PropertyModel<Address>(address, "isWorkAddress"));
 			add(isWorkAddressCB);
+
+			add(new Button("addaddressbutton", Model.of("Submit")));
 
 			add(backLink("backLink", contactModel.getObject()));
 		}
