@@ -2,13 +2,12 @@ package com.mylab.wicket.jpa.ui.pages.user;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
+import com.googlecode.wicket.jquery.ui.form.button.Button;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -17,6 +16,7 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.validator.StringValidator;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.ui.application.SignIn;
@@ -92,6 +92,8 @@ public class RegisterUser extends WebPage {
 			DropDownChoice<String> rolesDDC = new DropDownChoice<String>("role", userRoles);
 			rolesDDC.setRequired(true);
 			add(rolesDDC);
+			
+			add(new Button("registerbutton", Model.of("Submit")));
 
 			add(backLink("backLink"));
 		}
