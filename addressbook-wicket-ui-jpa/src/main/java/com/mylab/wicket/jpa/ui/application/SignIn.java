@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
+import com.googlecode.wicket.jquery.ui.form.button.Button;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.extensions.captcha.kittens.KittenCaptchaPanel;
@@ -19,7 +19,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.http.WebRequest;
-
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 import com.mylab.wicket.jpa.ui.pages.user.RegisterUser;
 
@@ -256,6 +255,7 @@ public final class SignIn extends WebPage {
 					captcha.reset();
 				}
 			});
+			add(new Button("signinbutton", Model.of("Submit")));
 		}
 
 		/**
@@ -280,11 +280,7 @@ public final class SignIn extends WebPage {
 					}
 					setResponsePage(new HomePage());
 				} else {
-					// Get the error message from the properties file associated
-					// with the Component
 					String errmsg = getString("loginError", null, "Login failed!");
-
-					// Register the error message with the feedback panel
 					error(errmsg);
 				}
 			}
