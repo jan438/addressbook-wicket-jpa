@@ -2,11 +2,6 @@ package com.mylab.wicket.jpa.ui.pages.user;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import com.googlecode.wicket.jquery.ui.form.button.Button;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -19,6 +14,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.validation.validator.StringValidator;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
+import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignIn;
 
 public class RegisterUser extends WebPage {
@@ -92,43 +88,19 @@ public class RegisterUser extends WebPage {
 			DropDownChoice<String> rolesDDC = new DropDownChoice<String>("role", userRoles);
 			rolesDDC.setRequired(true);
 			add(rolesDDC);
-			
+
 			add(new Button("registerbutton", Model.of("Submit")));
 
 			add(backLink("backLink"));
-		}
-		
-		@PersistenceContext
-		public static boolean persist(AddressBookUser user) {
-			boolean success = false;
-			EntityManagerFactory entityManagerFactory = Persistence
-					.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
-			EntityManager em = entityManagerFactory.createEntityManager();
-			em.getTransaction().begin();
-			Query q = em.createNativeQuery("select nextval('addressbookuser_id_seq')");
-			long result = (long) q.getSingleResult();
-			if (result > 0) {
-				user.setId(result);
-				try {
-					em.persist(user);
-					em.getTransaction().commit();
-					success = true;
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			em.close();
-			return success;
 		}
 
 		@Override
 		public final void onSubmit() {
 
 			final AddressBookUser u = getModelObject();
-			Boolean saveSuccessful = persist(u);
-
-			if (saveSuccessful) {
-
+			boolean success = JPAFunctions.query_name_user(u.getUsername());
+			if (!success) {
+				JPAFunctions.persist_newuser(u);
 				// Pass success message to next page:
 				String language = getSession().getLocale().getLanguage();
 				switch (language) {
