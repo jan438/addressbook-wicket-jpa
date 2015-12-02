@@ -11,7 +11,6 @@ import org.apache.wicket.markup.html.basic.MultiLineLabel;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -23,6 +22,7 @@ import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.ui.application.MailClient;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
+import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 
 public class MailContact extends WebPage {
 
