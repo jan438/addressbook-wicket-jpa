@@ -13,7 +13,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
-
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
@@ -92,7 +91,7 @@ public class EditUsers extends WebPage {
 
 				final SignInSession session = (SignInSession) getSession();
 				final AddressBookUser userInSession = session.getUser();
-
+				
 				// Add a link to remove the chosen user if it's not the current
 				// active user
 				if (u.getUsername().equalsIgnoreCase(userInSession.getUsername())) {
