@@ -9,7 +9,6 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -19,8 +18,8 @@ import org.apache.wicket.validation.IValidationError;
 import org.apache.wicket.validation.Validatable;
 import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
-
 import com.googlecode.wicket.jquery.ui.form.button.Button;
+import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
