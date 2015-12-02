@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
+
+import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
