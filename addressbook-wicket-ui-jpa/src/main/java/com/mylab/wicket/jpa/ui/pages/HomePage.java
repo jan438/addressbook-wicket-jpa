@@ -3,7 +3,6 @@ package com.mylab.wicket.jpa.ui.pages;
 import java.util.List;
 import org.apache.wicket.Page;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.WebPage;
@@ -14,6 +13,8 @@ import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
+
+import com.googlecode.wicket.jquery.ui.markup.html.link.AjaxLink;
 import com.googlecode.wicket.jquery.ui.markup.html.link.BookmarkablePageLink;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
