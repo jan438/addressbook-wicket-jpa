@@ -224,7 +224,7 @@ public class EditContact extends WebPage {
 			Validatable<String> validatable = zipvalidator.validate(a.getZipcode(), a.getCountry());
 			List<IValidationError> errors = validatable.getErrors();
 			if (errors.isEmpty()) {
-				JPAFunctions.persist_address(a);
+				JPAFunctions.persist_existingaddress(a);
 				String language = session.getLocale().getLanguage();
 				switch (language) {
 				case "nl":

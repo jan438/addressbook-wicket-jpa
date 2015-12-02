@@ -260,7 +260,7 @@ public class JPAFunctions {
 	}
 
 	@PersistenceContext
-	public static void persist_address(Address address) {
+	public static void persist_newaddress(Address address) {
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
@@ -271,7 +271,24 @@ public class JPAFunctions {
 		em.getTransaction().commit();
 		em.close();
 	}
-
+	
+	@PersistenceContext
+	public static void persist_existingaddress(Address address) {
+		EntityManagerFactory entityManagerFactory = Persistence
+				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		Address dbaddress = em.find(Address.class, address.getId());
+		dbaddress.setStreet(address.getStreet());
+		dbaddress.setZipcode(address.getZipcode());
+		dbaddress.setCity(address.getCity());
+		dbaddress.setCountry(address.getCountry());
+		dbaddress.setIsWorkAddress(address.getIsWorkAddress());
+		em.persist(dbaddress);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
 	@PersistenceContext
 	public static Set<Address> getAddresses(long id) {
 		EntityManagerFactory entityManagerFactory = Persistence

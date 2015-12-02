@@ -273,7 +273,7 @@ public class AddAddress extends WebPage {
 			List<IValidationError> errors = validatable.getErrors();
 			if (errors.isEmpty()) {
 				address.setContact(contact);
-				JPAFunctions.persist_address(address);
+				JPAFunctions.persist_newaddress(address);
 				String language = getSession().getLocale().getLanguage();
 				switch (language) {
 				case "nl":
