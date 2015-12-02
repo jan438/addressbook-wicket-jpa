@@ -2,8 +2,8 @@ package com.mylab.wicket.jpa.ui.pages.user;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.Link;
 
+import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
