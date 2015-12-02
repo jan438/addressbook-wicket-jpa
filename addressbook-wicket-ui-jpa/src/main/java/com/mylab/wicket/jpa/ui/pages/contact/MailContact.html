@@ -41,8 +41,8 @@
 				<textarea wicket:id="text">This is a comment</textarea>
 			</p>
 			<input type="text" wicket:id="comment" class="nospam" onfocus="getElementById('formsubmit').focus();" /> 
-			<br /> 
-			<input type="submit" wicket:message="value:mail" /> 
+			<br />
+			<input wicket:id="mailbutton" type="submit" wicket:message="value:mail" />
 			<input wicket:id="backLink" type="submit" wicket:message="value:cancel" />
 		</form>
 		<span wicket:id="comments" id="comments"> <span

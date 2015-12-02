@@ -15,6 +15,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.StringResourceModel;
 import org.apache.wicket.util.value.ValueMap;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
@@ -22,6 +23,7 @@ import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.ui.application.MailClient;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
+import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 
 public class MailContact extends WebPage {
@@ -85,6 +87,8 @@ public class MailContact extends WebPage {
 
 			// Add simple automated spam prevention measure.
 			add(new TextField<>("comment").setType(String.class));
+			
+			add(new Button("mailbutton", Model.of("Submit")));
 
 			add(backLink("backLink"));
 		}
