@@ -9,7 +9,6 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
@@ -24,6 +23,7 @@ import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
 
 import com.googlecode.wicket.jquery.ui.form.button.Button;
+import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
