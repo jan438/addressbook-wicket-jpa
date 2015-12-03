@@ -9,11 +9,11 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
+import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
@@ -38,9 +38,9 @@ public class EditUsers extends WebPage {
 		add(new Label("userInfo", getUserInfo(getSession())));
 
 		// Add a FeedbackPanel for displaying our messages
-		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		add(feedbackPanel);
-
+		// FeedbackPanel //
+		add(new JQueryFeedbackPanel("feedback"));
+		
 		List<AddressBookUser> userList = new ArrayList<AddressBookUser>();
 		userList.addAll(JPAFunctions.getAllUsers());
 
