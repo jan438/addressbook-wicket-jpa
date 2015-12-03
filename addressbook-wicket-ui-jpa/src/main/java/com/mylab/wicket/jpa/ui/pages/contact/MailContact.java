@@ -13,7 +13,6 @@ import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.StringResourceModel;
@@ -25,6 +24,7 @@ import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
+import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 
 public class MailContact extends WebPage {
 
@@ -36,7 +36,7 @@ public class MailContact extends WebPage {
 	public MailContact(Contact contact) {
 		MailContact.contact = contact;
 
-		add(new FeedbackPanel("feedback"));
+		add(new JQueryFeedbackPanel("feedback"));
 
 		// Show user's name and role:
 		add(new Label("userInfo", getUserInfo(getSession())));
