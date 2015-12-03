@@ -7,6 +7,8 @@ import java.util.Locale;
 import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.AjaxLink;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
+import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.captcha.kittens.KittenCaptchaPanel;
 import org.apache.wicket.markup.html.WebPage;
@@ -15,7 +17,6 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.http.WebRequest;
@@ -129,8 +130,8 @@ public final class SignIn extends WebPage {
 	public SignIn() {
 
 		// Create feedback panel and add to page
-		add(new FeedbackPanel("feedback"));
-
+		add(new JQueryFeedbackPanel("feedback"));
+		
 		// Add register button:
 		add(registerUserLink("registerUser"));
 		
