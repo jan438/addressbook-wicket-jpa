@@ -12,7 +12,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -21,9 +20,9 @@ import org.apache.wicket.validation.IValidationError;
 import org.apache.wicket.validation.Validatable;
 import org.apache.wicket.validation.ValidationError;
 import org.apache.wicket.validation.validator.StringValidator;
-
 import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
+import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
@@ -59,8 +58,7 @@ public class EditContact extends WebPage {
 		add(editContactForm);
 
 		// Add a FeedbackPanel for displaying our messages
-		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		add(feedbackPanel);
+		add(new JQueryFeedbackPanel("feedback"));
 
 		// Addresses list view
 		List<Address> addresses = new ArrayList<Address>();
