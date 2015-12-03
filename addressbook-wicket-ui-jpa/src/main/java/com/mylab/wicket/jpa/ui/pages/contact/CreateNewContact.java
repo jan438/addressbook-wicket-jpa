@@ -1,8 +1,8 @@
 package com.mylab.wicket.jpa.ui.pages.contact;
 
 import java.util.Date;
-
 import com.googlecode.wicket.jquery.ui.form.button.Button;
+import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeAction;
@@ -10,7 +10,6 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -43,7 +42,7 @@ public class CreateNewContact extends WebPage {
 		setDefaultModel(contactModel);
 
 		// Create and add feedback panel to page
-		add(new FeedbackPanel("feedback"));
+		add(new JQueryFeedbackPanel("feedback"));
 
 		// Add a create Contact form to the page
 		add(new CreateContactForm("createContactForm", contactModel));
