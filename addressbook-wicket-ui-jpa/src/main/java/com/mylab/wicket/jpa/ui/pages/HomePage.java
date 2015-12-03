@@ -13,10 +13,10 @@ import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
-
 import com.googlecode.wicket.jquery.ui.markup.html.link.AjaxLink;
 import com.googlecode.wicket.jquery.ui.markup.html.link.BookmarkablePageLink;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
+import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
@@ -51,8 +51,7 @@ public class HomePage extends WebPage {
 		add(new Label("userInfo", getUserInfo(session)));
 
 		// Add a FeedbackPanel for displaying our messages
-		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-		add(feedbackPanel);
+		add(new JQueryFeedbackPanel("feedback"));
 
 		// Add sign out button:
 		add(signOutLink("signOut"));
