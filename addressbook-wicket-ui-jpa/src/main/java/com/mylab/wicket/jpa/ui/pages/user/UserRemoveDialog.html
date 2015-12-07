@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+	<wicket:head>
+		<style type="text/css">
+			table#dialog-table {
+				width: 100%;
+				border-spacing: 0;
+				border-collapse: collapse;
+			}
+
+			th, td {
+				padding: 5px;
+			}
+		</style>
+	</wicket:head>
+</head>
+<body>
+	<wicket:panel>
+		<form wicket:id="form">
+			<table id="dialog-table">
+				<tr>
+					<td width="30%">
+						Name:
+					</td>
+					<td width="70%">
+						<span wicket:id="username" style="width: 100%;"></span>
+					</td>
+				</tr>
+				<tr>
+					<td width="30%">
+						Password:
+					</td>
+					<td width="70%">
+						<span wicket:id="password" style="width: 100%;"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Role:
+					</td>
+					<td>
+						<div wicket:id="role"></div>
+					</td>
+				</tr>
+			</table>
+			<div wicket:id="feedback"></div>
+		</form>
+	</wicket:panel>
+</body>
+</html>

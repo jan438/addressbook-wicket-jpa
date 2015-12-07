@@ -28,6 +28,7 @@ import com.mylab.wicket.jpa.ui.pages.contact.ShowContact;
 import com.mylab.wicket.jpa.ui.pages.contact.ShowContactModalWindow;
 import com.mylab.wicket.jpa.ui.pages.user.EditUsers;
 import com.mylab.wicket.jpa.ui.pages.user.RemoveConfirmation;
+import com.mylab.wicket.jpa.ui.pages.user.UserDialogPage;
 /**
  * The applications homepage. Shows a list of contacts
  */
@@ -57,6 +58,8 @@ public class HomePage extends WebPage {
 
 		// Add Edit Users button:
 		add(new EditUsersLink("editUsers", EditUsers.class));
+		// Add Edit Users button:
+		add(new UserDialogLink("userDialog", UserDialogPage.class));
 
 		// List all Contacts
 		final List<Contact> contacts = JPAFunctions.getContacts();
@@ -193,6 +196,19 @@ public class HomePage extends WebPage {
 		private static final long serialVersionUID = 1L;
 
 		public EditUsersLink(String id, Class<EditUsers> pageClass) {
+			super(id, pageClass);
+		}
+	}
+	
+	@AuthorizeAction(action = "ENABLE", roles = { "ADMIN" })
+	public class UserDialogLink extends BookmarkablePageLink<Void> {
+
+		/**
+		 *
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public UserDialogLink(String id, Class<UserDialogPage> pageClass) {
 			super(id, pageClass);
 		}
 	}
