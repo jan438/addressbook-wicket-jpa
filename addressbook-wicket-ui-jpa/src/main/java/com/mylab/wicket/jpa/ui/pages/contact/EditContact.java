@@ -266,7 +266,7 @@ public class EditContact extends WebPage {
 			add(lastNameField);
 
 			dateOfBirthField = new DatePicker("dateOfBirth",
-			new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
+					new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
 
 			dateOfBirthField.add(new BirthDayValidator());
 
@@ -276,7 +276,7 @@ public class EditContact extends WebPage {
 			mailAddressField.setRequired(true);
 			mailAddressField.add(StringValidator.maximumLength(30));
 			add(mailAddressField);
-			
+
 			add(new Button("editcontactbutton", Model.of("Submit")));
 
 		}
@@ -287,20 +287,35 @@ public class EditContact extends WebPage {
 			final Contact contact = getModelObject();
 			Date birthday = dateOfBirthField.getConvertedInput();
 			contact.setDateOfBirth(birthday);
-			JPAFunctions.persist_existingcontact(contact);
 			String language = session.getLocale().getLanguage();
-			switch (language) {
-			case "nl":
-				info("Contact '" + contact.getFirstName() + "' opgeslagen!");
-				break;
-			case "de":
-				info("Contact '" + contact.getFirstName() + "' gespeichert!");
-				break;
-			default:
-				info("Contact '" + contact.getFirstName() + "' saved!");
-				break;
+			boolean success = JPAFunctions.query_mail_existingcontact(contact);
+			if (!success) {
+				JPAFunctions.persist_existingcontact(contact);
+				// Pass success message to next page:
+				switch (language) {
+				case "nl":
+					getSession().info("Het Contact '" + contact.getFirstName() + "' is opgeslagen!");
+					break;
+				case "de":
+					getSession().info("Der Kontact '" + contact.getFirstName() + "' ist gespeichert!");
+					break;
+				default:
+					getSession().info("The Contact '" + contact.getFirstName() + "' was saved!");
+					break;
+				}
+			} else {
+				switch (language) {
+				case "nl":
+					getSession().info("Het Contact '" + contact.getFirstName() + "' is niet opgeslagen!");
+					break;
+				case "de":
+					getSession().info("Der Kontact '" + contact.getFirstName() + "' ist nicht gespeichert!");
+					break;
+				default:
+					getSession().info("The Contact '" + contact.getFirstName() + "' was not saved!");
+					break;
+				}
 			}
 		}
-
 	}
 }

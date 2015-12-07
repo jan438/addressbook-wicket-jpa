@@ -18,6 +18,7 @@ import org.apache.wicket.validation.validator.StringValidator;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
+import com.mylab.wicket.jpa.ui.application.SignIn;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 
 /**
@@ -78,7 +79,7 @@ public class CreateNewContact extends WebPage {
 			add(lastNameField);
 
 			dateOfBirthField = new DatePicker("dateOfBirth",
-			new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
+					new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
 
 			dateOfBirthField.add(new BirthDayValidator());
 
@@ -101,10 +102,11 @@ public class CreateNewContact extends WebPage {
 
 			Date birthday = dateOfBirthField.getConvertedInput();
 			contact.setDateOfBirth(birthday);
-			boolean success = JPAFunctions.persist_newcontact(contact);
 
 			String language = getSession().getLocale().getLanguage();
-			if (success) {
+			boolean success = JPAFunctions.query_mail_existingcontacts(contact.getMailAddress());
+			if (!success) {
+				JPAFunctions.persist_newcontact(contact);
 				// Pass success message to next page:
 				switch (language) {
 				case "nl":

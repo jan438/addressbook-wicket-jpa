@@ -150,6 +150,55 @@ public class JPAFunctions {
 	}
 
 	@PersistenceContext
+	public static boolean query_mail_existingcontacts(String mailAddress) {
+		boolean success = false;
+		EntityManagerFactory entityManagerFactory = Persistence
+				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		@SuppressWarnings("unchecked")
+		List<Contact> contacts = em.createNamedQuery("findAllContactsWithMailAddress")
+				.setParameter("mailAddress", mailAddress).getResultList();
+		if ((contacts != null) && (!contacts.isEmpty())) {
+			Contact contact = contacts.get(0);
+			System.out.println("contact with mailaddress " + contact.getMailAddress() + " found "
+					+ contact.getFirstName() + " " + contact.getLastName());
+			success = true;
+		} else {
+			System.out.println("contact with mailaddress " + mailAddress + " not found");
+		}
+		em.getTransaction().commit();
+		em.close();
+		return success;
+	}
+
+	@PersistenceContext
+	public static boolean query_mail_existingcontact(Contact dbcontact) {
+		boolean success = false;
+		EntityManagerFactory entityManagerFactory = Persistence
+				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		em.getTransaction().begin();
+		String mailaddress = dbcontact.getMailAddress();
+		@SuppressWarnings("unchecked")
+		List<Contact> contacts = em.createNamedQuery("findAllContactsWithMailAddress")
+				.setParameter("mailAddress", mailaddress).getResultList();
+		if ((contacts != null) && (!contacts.isEmpty())) {
+			Contact contact = contacts.get(0);
+			if (contact.getId() != dbcontact.getId()) {
+				System.out.println("contact with mailaddress " + contact.getMailAddress() + " found "
+						+ contact.getFirstName() + " " + contact.getLastName());
+				success = true;
+			}
+		} else {
+			System.out.println("contact with mailaddress " + mailaddress + " not found");
+		}
+		em.getTransaction().commit();
+		em.close();
+		return success;
+	}
+
+	@PersistenceContext
 	public static boolean persist_newcontact(Contact contact) {
 		boolean success = false;
 		EntityManagerFactory entityManagerFactory = Persistence
@@ -271,7 +320,7 @@ public class JPAFunctions {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	@PersistenceContext
 	public static void persist_existingaddress(Address address) {
 		EntityManagerFactory entityManagerFactory = Persistence
@@ -288,7 +337,7 @@ public class JPAFunctions {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
+
 	@PersistenceContext
 	public static Set<Address> getAddresses(long id) {
 		EntityManagerFactory entityManagerFactory = Persistence
