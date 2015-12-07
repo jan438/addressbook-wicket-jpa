@@ -30,7 +30,7 @@ table td {
 						</tr>
 						<tr wicket:id="user">
 							<td wicket:id="username"></td>
-							<td wicket:id="password"></td>			
+							<td wicket:id="password"></td>
 							<td wicket:id="role"></td>
 							<td>
 								<button wicket:id="edit">Edit</button>
@@ -43,11 +43,11 @@ table td {
 				</div>
 				<br />
 				<button wicket:id="create">Create</button>
-				<br />
-				<br />
+				<br /> <br />
 				<div wicket:id="feedback" style="width: 360px;"></div>
 			</form>
 		</div>
+		<input wicket:id="backLink" type="submit" wicket:message="value:back" />
 		<div wicket:id="adddialog">[adddialog]</div>
 		<div wicket:id="removedialog">[removedialog]</div>
 	</wicket:extend>

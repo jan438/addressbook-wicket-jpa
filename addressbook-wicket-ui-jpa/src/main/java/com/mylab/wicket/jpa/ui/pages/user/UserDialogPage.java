@@ -10,10 +10,12 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.util.ListModel;
 import com.googlecode.wicket.jquery.ui.form.button.AjaxButton;
+import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.jquery.ui.widget.dialog.DialogButton;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
+import com.mylab.wicket.jpa.ui.pages.HomePage;
 
 //@AuthorizeInstantiation("ADMIN")
 //@AuthorizeAction(action = "RENDER", roles = {"ADMIN"})
@@ -132,5 +134,24 @@ public class UserDialogPage extends TemplatePage {
 				adddialog.open(target); 
 			}
 		});
+		add(backLink("backLink"));
+	}
+	
+	public static Link<Void> backLink(final String name) {
+
+		return new Link<Void>(name) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			/**
+			 * @see org.apache.wicket.markup.html.link.Link#onClick()
+			 */
+			@Override
+			public void onClick() {
+				setResponsePage(new HomePage());
+			}
+		};
 	}
 }
