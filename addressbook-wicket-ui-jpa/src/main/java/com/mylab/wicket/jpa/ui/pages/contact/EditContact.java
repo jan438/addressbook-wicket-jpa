@@ -306,13 +306,13 @@ public class EditContact extends WebPage {
 			} else {
 				switch (language) {
 				case "nl":
-					getSession().info("Het Contact '" + contact.getFirstName() + "' is niet opgeslagen!");
+					getSession().error("Het Contact '" + contact.getFirstName() + "' is niet opgeslagen (mailadres niet uniek)!");
 					break;
 				case "de":
-					getSession().info("Der Kontact '" + contact.getFirstName() + "' ist nicht gespeichert!");
+					getSession().error("Der Kontact '" + contact.getFirstName() + "' ist nicht gespeichert (mailadress nicht einzigartig)!");
 					break;
 				default:
-					getSession().info("The Contact '" + contact.getFirstName() + "' was not saved!");
+					getSession().error("The Contact '" + contact.getFirstName() + "' was not saved (mailaddress not unique)!");
 					break;
 				}
 			}

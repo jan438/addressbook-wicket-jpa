@@ -18,7 +18,6 @@ import org.apache.wicket.validation.validator.StringValidator;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
-import com.mylab.wicket.jpa.ui.application.SignIn;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 
 /**
