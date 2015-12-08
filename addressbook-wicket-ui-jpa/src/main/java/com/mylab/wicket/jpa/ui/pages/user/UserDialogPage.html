@@ -44,7 +44,7 @@
 		<div id="wrapper-panel-frame" class="ui-corner-all">
 			<form wicket:id="form">
 				<div class="ui-widget-content ui-corner-all"
-					style="width: 480px; min-height: 120px; border: 1px solid #336699;">
+					style="width: 550px; min-height: 120px; border: 1px solid #336699;">
 					<table>
 						<tr>
 							<th width="40%">Name</th>
@@ -55,21 +55,18 @@
 							<td wicket:id="username"></td>
 							<td wicket:id="password"></td>
 							<td wicket:id="role"></td>
-							<td>
-								<button wicket:id="edit">Edit</button>
+							<td><input wicket:id="edit" type="button" wicket:message="value:edit" />
 							</td>
-							<td>
-								<button wicket:id="remove">Remove</button>
+							<td><input wicket:id="remove" type="button" wicket:message="value:remove" />
 							</td>
 						</tr>
 					</table>
 				</div>
-				<br />
-				<input wicket:id="create" wicket:message="value:create" />
+				<br /> <input wicket:id="create" type="button" wicket:message="value:create" />
 				<br /> <br />
 			</form>
 		</div>
-		<input wicket:id="backLink" type="submit" wicket:message="value:back" />
+		<input wicket:id="backLink" type="button" wicket:message="value:back" />
 		<div wicket:id="adddialog">[adddialog]</div>
 		<div wicket:id="removedialog">[removedialog]</div>
 	</div>
