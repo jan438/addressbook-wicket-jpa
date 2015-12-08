@@ -55,6 +55,7 @@ public class UserDialogPage extends WebPage {
 					JPAFunctions.persist_newuser(user);
 					this.info(String.format("User '%s' created", user.getUsername()));
 				} else {
+					JPAFunctions.persist_existinguser(user);
 					this.info(String.format("User '%s' updated", user.getUsername()));
 				}
 			}
