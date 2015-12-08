@@ -73,6 +73,7 @@ public class UserDialogPage extends TemplatePage {
 				if (users.contains(user)) {
 					this.info(String.format("User '%s' removed", user.getUsername()));
 					users.remove(user);
+					JPAFunctions.remove_user(user.getId());
 				}
 			}
 
