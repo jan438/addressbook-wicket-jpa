@@ -46,6 +46,7 @@ public class UserDialogPage extends TemplatePage {
 
 				if (!users.contains(user)) {
 					users.add(user);
+					JPAFunctions.persist_newuser(user);
 					this.info(String.format("User '%s' created", user.getUsername()));
 				} else {
 					this.info(String.format("User '%s' updated", user.getUsername()));

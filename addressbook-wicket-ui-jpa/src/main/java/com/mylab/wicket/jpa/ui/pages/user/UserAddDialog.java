@@ -2,17 +2,14 @@ package com.mylab.wicket.jpa.ui.pages.user;
 
 import java.util.Arrays;
 import java.util.List;
-
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
-import org.apache.wicket.markup.html.form.EmailTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-
 import com.googlecode.wicket.jquery.ui.JQueryIcon;
 import com.googlecode.wicket.jquery.ui.form.RadioChoice;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
@@ -37,7 +34,7 @@ abstract class UserAddDialog extends AbstractFormDialog<AddressBookUser> {
 		// Slider //
 		this.form.add(new RequiredTextField<String>("username"));
 		this.form.add(new RequiredTextField<String>("password"));
-		this.form.add(new RadioChoice<String>("role", Arrays.asList("Admin", "User", "Guest")).setRequired(true));
+		this.form.add(new RadioChoice<String>("role", Arrays.asList("ADMIN", "USER", "GUEST")).setRequired(true));
 
 		// FeedbackPanel //
 		this.feedback = new JQueryFeedbackPanel("feedback");
