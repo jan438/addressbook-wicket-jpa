@@ -2,8 +2,11 @@ package com.mylab.wicket.jpa.ui.pages.user;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -15,11 +18,12 @@ import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.jquery.ui.widget.dialog.DialogButton;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
+import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 
 //@AuthorizeInstantiation("ADMIN")
 //@AuthorizeAction(action = "RENDER", roles = {"ADMIN"})
-public class UserDialogPage extends TemplatePage {
+public class UserDialogPage extends WebPage {
 	private static final long serialVersionUID = 1L;
 
 	public List<AddressBookUser> users;
@@ -30,10 +34,12 @@ public class UserDialogPage extends TemplatePage {
 		users.addAll(JPAFunctions.getAllUsers());
 
 		final Form<List<AddressBookUser>> form = new Form<List<AddressBookUser>>("form", new ListModel<>(this.users));
-		this.add(form);
+		add(form);
+
+		add(new Label("userInfo", getUserInfo(getSession())));
 
 		// FeedbackPanel //
-		form.add(new JQueryFeedbackPanel("feedback"));
+		add(new JQueryFeedbackPanel("feedback"));
 
 		// Dialog //
 		final UserAddDialog adddialog = new UserAddDialog("adddialog", "User details") {
@@ -59,7 +65,7 @@ public class UserDialogPage extends TemplatePage {
 			}
 		};
 
-		this.add(adddialog);
+		add(adddialog);
 		
 		// Dialog //
 		final UserRemoveDialog removedialog = new UserRemoveDialog("removedialog", "User details") {
@@ -83,7 +89,7 @@ public class UserDialogPage extends TemplatePage {
 			}
 		};
 
-		this.add(removedialog);
+		add(removedialog);
 
 		// ListView //
 		form.add(new PropertyListView<AddressBookUser>("user", form.getModel()) {
@@ -139,6 +145,14 @@ public class UserDialogPage extends TemplatePage {
 		add(backLink("backLink"));
 	}
 	
+	protected String getUserInfo(final Session session) {
+		final AddressBookUser user = ((SignInSession) session).getUser();
+		if (null != user) {
+			return "User: " + user.getUsername() + " || Role: "+ user.getRole();
+		} else {
+			return "No user data available.";
+		}
+	}
 	public static Link<Void> backLink(final String name) {
 
 		return new Link<Void>(name) {

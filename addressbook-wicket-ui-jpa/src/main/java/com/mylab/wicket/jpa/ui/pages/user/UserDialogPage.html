@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
-<wicket:head>
-	<title>Wicket jQuery UI: form dialog box / create user</title>
-	<style type="text/css">
-table {
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket</title>
+<style>
+.table {
+	border-collapse: separate;
+	border-spacing: 0px;
+	text-align: center;
 	width: 100%;
-	border-spacing: 0;
-	border-collapse: collapse;
 }
 
-table td {
-	padding: 1px;
+#ft {
+	text-align: center
 }
 </style>
-</wicket:head>
+<link rel="shortcut icon" href="favicon.ico"
+	type="image/vnd.microsoft.icon" />
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
 </head>
 <body>
-	<wicket:extend>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1>
+				<wicket:message key="addressbook">Address Book</wicket:message>
+			</h1>
+		</div>
+	</div>
+	<div id="bd">
+
+		<h3>
+			<wicket:message key="editusers">Edit Users</wicket:message>
+		</h3>
+
+		<font color="red"><span wicket:id="feedback"></span></font>
+
 		<div id="wrapper-panel-frame" class="ui-corner-all">
 			<form wicket:id="form">
 				<div class="ui-widget-content ui-corner-all"
@@ -44,12 +67,14 @@ table td {
 				<br />
 				<button wicket:id="create">Create</button>
 				<br /> <br />
-				<div wicket:id="feedback" style="width: 360px;"></div>
 			</form>
 		</div>
 		<input wicket:id="backLink" type="submit" wicket:message="value:back" />
 		<div wicket:id="adddialog">[adddialog]</div>
 		<div wicket:id="removedialog">[removedialog]</div>
-	</wicket:extend>
+	</div>
+	<div id="ft">
+		<br> <br> <span wicket:id="userInfo">message</span>
+	</div>
 </body>
 </html>
