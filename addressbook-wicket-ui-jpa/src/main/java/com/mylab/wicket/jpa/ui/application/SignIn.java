@@ -8,7 +8,7 @@ import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.AjaxLink;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
-
+import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.captcha.kittens.KittenCaptchaPanel;
 import org.apache.wicket.markup.html.WebPage;
@@ -23,18 +23,9 @@ import org.apache.wicket.request.http.WebRequest;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 import com.mylab.wicket.jpa.ui.pages.user.RegisterUser;
 
-/**
- * Simple example of a sign in page. Even simpler, as shown in the
- * authentication-2 example, is using the SignInPanel from the auth-role
- * package. Beside that this simple example does not support "rememberMe".
- * 
- * @author Jonathan Locke
- */
 public final class SignIn extends WebPage {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	/** Relevant locales wrapped in a list. */
@@ -42,8 +33,6 @@ public final class SignIn extends WebPage {
 
 	private KittenCaptchaPanel captcha;
 	private int errors;
-	private boolean kittens_checked = false;
-
 	SignInSession session = getMySession();
 
 	public void setLocale(Locale locale) {
@@ -128,7 +117,6 @@ public final class SignIn extends WebPage {
 	 * Page Constructor
 	 */
 	public SignIn() {
-
 		// Create feedback panel and add to page
 		add(new JQueryFeedbackPanel("feedback"));
 		
@@ -222,38 +210,39 @@ public final class SignIn extends WebPage {
 				public void onClick(AjaxRequestTarget target) {
 					String language = session.getLocale().getLanguage();
 					if (!isSpamBot() && captcha.allKittensSelected()) {
-						kittens_checked = true;
+						getSession().setAttribute("kittens_checked", "true");
 						switch (language) {
 						case "nl":
-							target.appendJavaScript("alert('Succes, U kunt nu inloggen!');");
+							getSession().info("Succes, U kunt nu inloggen!");
 							break;
 						case "de":
-							target.appendJavaScript("alert('Erfolg, Sie können jetzt login!');");
+							getSession().info("Erfolg, Sie können jetzt login!");
 							break;
 						default:
-							target.appendJavaScript("alert('Success, You can login now!');");
+							getSession().info("Success, You can login now!");
 							break;
 						}
 					} else {
 						errors++;
 						if (isSpamBot()) {
-							target.appendJavaScript("alert('Spammer alert');");
+							getSession().error("Spammer alert");
 						} else {
 							switch (language) {
 							case "nl":
-								target.appendJavaScript("alert('Wilt U a.u.b. opnieuw proberen');");
+								getSession().error("Wilt U a.u.b. opnieuw proberen");
 								break;
 							case "de":
-								target.appendJavaScript("alert('Bitte, Versuchen Sie nochmals');");
+								getSession().error("Bitte, Versuchen Sie nochmals");
 								break;
 							default:
-								target.appendJavaScript("alert('Please try again');");
+								getSession().error("Please try again");
 								break;
 							}
 						}
 						target.add(captcha);
 					}
 					captcha.reset();
+					setResponsePage(new SignIn());
 				}
 			});
 			add(new Button("signinbutton", Model.of("Submit")));
@@ -264,7 +253,8 @@ public final class SignIn extends WebPage {
 		 */
 		@Override
 		public final void onSubmit() {
-			if (kittens_checked) {
+			String kittens_checked = (String) getSession().getAttribute("kittens_checked");
+			if ((kittens_checked != null) && kittens_checked.equals("true")) {
 				// Sign the AddressBookUser in
 				if (session.signIn(usernameField.getModelObject(), passwordField.getModelObject())) {
 					String language = session.getLocale().getLanguage();
