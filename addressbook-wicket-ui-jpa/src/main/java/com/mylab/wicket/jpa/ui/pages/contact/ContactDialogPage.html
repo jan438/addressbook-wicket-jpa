@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>Address Book with Apache Wicket</title>
+<style>
+.table {
+	border-collapse: separate;
+	border-spacing: 0px;
+	text-align: center;
+	width: 100%;
+}
+
+#ft {
+	text-align: center
+}
+</style>
+<link rel="shortcut icon" href="favicon.ico"
+	type="image/vnd.microsoft.icon" />
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div id="hd">
+		<div id="logo">
+			<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
+
+			<h1>
+				<wicket:message key="addressbook">Address Book</wicket:message>
+			</h1>
+		</div>
+	</div>
+	<div id="bd">
+
+		<h3>
+			<wicket:message key="editcontacts">Edit Contacts</wicket:message>
+		</h3>
+
+		<font color="red"><span wicket:id="feedback"></span></font>
+
+		<div id="wrapper-panel-frame" class="ui-corner-all">
+			<form wicket:id="form">
+				<div class="ui-widget-content ui-corner-all"
+					style="width: 550px; min-height: 120px; border: 1px solid #336699;">
+					<table>
+						<tr>
+							<th width="25%">Street</th>
+							<th width="20%">Zipcode</th>
+							<th width="25%">City</th>
+							<th width="25%">Country</th>
+							<th width="5%">IsWorkAddress</th>
+							
+						</tr>
+						<tr wicket:id="address">
+							<td wicket:id="street"></td>
+							<td wicket:id="zipcode"></td>
+							<td wicket:id="city"></td>
+							<td wicket:id="country"></td>
+							<td wicket:id="isWorkAddress"></td>
+							<td><input wicket:id="edit" type="button" wicket:message="value:edit" />
+							</td>
+							<td><input wicket:id="remove" type="button" wicket:message="value:remove" />
+							</td>
+						</tr>
+					</table>
+				</div>
+				<br /> <input wicket:id="create" type="button" wicket:message="value:create" />
+				<br /> <br />
+			</form>
+		</div>
+		<input wicket:id="backLink" type="button" wicket:message="value:back" />
+		<div wicket:id="adddialog">[adddialog]</div>
+		<div wicket:id="removedialog">[removedialog]</div>
+	</div>
+	<div id="ft">
+		<br> <br> <span wicket:id="userInfo">message</span>
+	</div>
+</body>
+</html>

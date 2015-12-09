@@ -15,7 +15,8 @@
 	text-align: center
 }
 </style>
-<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="shortcut icon" href="favicon.ico"
+	type="image/vnd.microsoft.icon" />
 <link
 	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
 	rel='stylesheet' type='text/css' />
@@ -35,11 +36,9 @@
 	<div id="bd">
 		<p align="right">
 			<input wicket:id="editUsers" type="submit"
-				wicket:message="value:editusers" />
-			<input wicket:id="userDialog" type="submit"
-				wicket:message="value:editusers" />
-			<input wicket:id="signOut"
-				type="submit" wicket:message="value:signout" />
+				wicket:message="value:editusers" /> <input wicket:id="userDialog"
+				type="submit" wicket:message="value:editusers" /> <input
+				wicket:id="signOut" type="submit" wicket:message="value:signout" />
 		</p>
 		<h3>... with Apache Wicket</h3>
 		<font color="red"><span wicket:id="feedback">message</span></font>
@@ -52,7 +51,9 @@
 				<td bgcolor="lightgrey"><b><wicket:message key="lastname">Last Name</wicket:message></b></td>
 				<td bgcolor="lightgrey"><b><wicket:message
 							key="dateofbirth">Date Of Birth</wicket:message></b></td>
-				<td bgcolor="lightgrey"><b><wicket:message key="mailaddress">Mail Address</wicket:message></b></td>
+				<td bgcolor="lightgrey"><b><wicket:message
+							key="mailaddress">Mail Address</wicket:message></b></td>
+				<td bgcolor="lightgrey"></td>
 				<td bgcolor="lightgrey"></td>
 				<td bgcolor="lightgrey"></td>
 				<td bgcolor="lightgrey"></td>
@@ -67,6 +68,8 @@
 				<td><input wicket:id="showContact" type="submit"
 					wicket:message="value:view" /></td>
 				<td><input wicket:id="editContact" type="submit"
+					wicket:message="value:edit" /></td>
+				<td><input wicket:id="contactDialog" type="submit"
 					wicket:message="value:edit" /></td>
 				<td><input wicket:id="mailContact" type="submit"
 					wicket:message="value:mail" /></td>

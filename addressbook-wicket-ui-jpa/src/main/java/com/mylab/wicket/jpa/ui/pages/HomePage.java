@@ -21,6 +21,7 @@ import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignIn;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
+import com.mylab.wicket.jpa.ui.pages.contact.ContactDialogPage;
 import com.mylab.wicket.jpa.ui.pages.contact.CreateNewContact;
 import com.mylab.wicket.jpa.ui.pages.contact.EditContact;
 import com.mylab.wicket.jpa.ui.pages.contact.MailContact;
@@ -149,6 +150,8 @@ public class HomePage extends WebPage {
 				// -----------------------------------------------------------------------------------------
 
 				contactItem.add(editContactLink("editContact", contact));
+				
+				contactItem.add(contactDialogLink("contactDialog", contact));
 
 				// Link for remove confirmation:
 				Link<Void> removeContactLink = removeContactLink("removeContact", contact);
@@ -272,7 +275,27 @@ public class HomePage extends WebPage {
 			}
 		};
 	}
+	
 	public static Link<Void> editContactLink(final String name, final Contact contact) {
+
+		return new Link<Void>(name) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+				setResponsePage(new EditContact(contact));
+			}
+
+			// Check the user's role:
+			@Override
+			public boolean isEnabled() {
+				return isAdminOrUser(getWebSession());
+			}
+		};
+	}
+	
+	public static Link<Void> contactDialogLink(final String name, final Contact contact) {
 
 		return new Link<Void>(name) {
 			/**
@@ -285,7 +308,7 @@ public class HomePage extends WebPage {
 			 */
 			@Override
 			public void onClick() {
-				setResponsePage(new EditContact(contact));
+				setResponsePage(new ContactDialogPage(contact));
 			}
 
 			// Check the user's role:
