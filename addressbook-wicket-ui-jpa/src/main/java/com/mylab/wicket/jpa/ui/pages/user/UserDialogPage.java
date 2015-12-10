@@ -34,12 +34,12 @@ public class UserDialogPage extends WebPage {
 		users.addAll(JPAFunctions.getAllUsers());
 
 		final Form<List<AddressBookUser>> form = new Form<List<AddressBookUser>>("form", new ListModel<>(this.users));
-		add(form);
+		this.add(form);
 
 		add(new Label("userInfo", getUserInfo(getSession())));
 
 		// FeedbackPanel //
-		add(new JQueryFeedbackPanel("feedback"));
+		form.add(new JQueryFeedbackPanel("feedback"));
 
 		// Dialog //
 		final UserAddDialog adddialog = new UserAddDialog("adddialog", "User details") {
@@ -66,7 +66,7 @@ public class UserDialogPage extends WebPage {
 			}
 		};
 
-		add(adddialog);
+		this.add(adddialog);
 		
 		// Dialog //
 		final UserRemoveDialog removedialog = new UserRemoveDialog("removedialog", "User details") {
@@ -90,7 +90,7 @@ public class UserDialogPage extends WebPage {
 			}
 		};
 
-		add(removedialog);
+		this.add(removedialog);
 
 		// ListView //
 		form.add(new PropertyListView<AddressBookUser>("user", form.getModel()) {
