@@ -50,7 +50,7 @@ public class ContactDialogPage extends WebPage {
 		add(editContactForm);
 		// Add a FeedbackPanel for displaying our messages
 
-		add(new JQueryFeedbackPanel("feedback"));
+		add(new JQueryFeedbackPanel("feedback0"));
 
 		addresses = new ArrayList<Address>();
 		addresses.addAll(JPAFunctions.getAddresses(contact.getId()));
@@ -61,7 +61,7 @@ public class ContactDialogPage extends WebPage {
 		add(new Label("userInfo", getUserInfo(getSession())));
 
 		// FeedbackPanel //
-		form.add(new JQueryFeedbackPanel("feedback"));
+		form.add(new JQueryFeedbackPanel("feedback1"));
 
 		// Dialog //
 		final AddressAddDialog adddialog = new AddressAddDialog("adddialog", "Address details") {
