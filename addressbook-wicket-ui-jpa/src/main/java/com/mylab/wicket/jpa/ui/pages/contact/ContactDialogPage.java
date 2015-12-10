@@ -33,12 +33,12 @@ public class ContactDialogPage extends WebPage {
 		addresses.addAll(JPAFunctions.getAddresses(contact.getId()));
 
 		final Form<List<Address>> form = new Form<List<Address>>("form", new ListModel<>(this.addresses));
-		add(form);
+		this.add(form);
 
 		add(new Label("userInfo", getUserInfo(getSession())));
 
 		// FeedbackPanel //
-		add(new JQueryFeedbackPanel("feedback"));
+		form.add(new JQueryFeedbackPanel("feedback"));
 
 		// Dialog //
 		final AddressAddDialog adddialog = new AddressAddDialog("adddialog", "Address details") {
@@ -65,7 +65,7 @@ public class ContactDialogPage extends WebPage {
 			}
 		};
 
-		add(adddialog);
+		this.add(adddialog);
 		
 		// Dialog //
 		final AddressRemoveDialog removedialog = new AddressRemoveDialog("removedialog", "Address details") {
@@ -89,7 +89,7 @@ public class ContactDialogPage extends WebPage {
 			}
 		};
 
-		add(removedialog);
+		this.add(removedialog);
 
 		// ListView //
 		form.add(new PropertyListView<Address>("address", form.getModel()) {
