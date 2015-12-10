@@ -34,12 +34,39 @@
 		</div>
 	</div>
 	<div id="bd">
-
 		<h3>
-			<wicket:message key="editcontacts">Edit Contacts</wicket:message>
+			<wicket:message key="editcontactdetails">Edit Contact Details</wicket:message>
 		</h3>
+		<font color="red"><span wicket:id="feedback">message</span></font>
+		<form wicket:id="editContactForm">
+			<fieldset>
+				<table>
+					<tr>
+						<td align="right"><wicket:message key="firstname">First Name:*</wicket:message></td>
+						<td><input wicket:id="firstName" type="text" /></td>
+					</tr>
 
+					<tr>
+						<td align="right"><wicket:message key="lastname">Last Name:*</wicket:message></td>
+						<td><input wicket:id="lastName" type="text" /></td>
+					</tr>
 
+					<tr>
+						<td align="right"><wicket:message key="dateofbirth">Date Of Birth:</wicket:message></td>
+						<td><input type="text" wicket:id="dateOfBirth" /></td>
+					</tr>
+					<tr>
+						<td align="right"><wicket:message key="mailaddress">Mail Address:*</wicket:message></td>
+						<td><input wicket:id="mailAddress" type="text" /></td>
+					</tr>
+				</table>
+			</fieldset>
+			<br> <input wicket:id="editcontactbutton" type="submit"
+				wicket:message="value:save" />
+		</form>
+		<h3>
+			<wicket:message key="editcontactaddresses">Edit Contact Addresses</wicket:message>
+		</h3>
 		<div id="wrapper-panel-frame" class="ui-corner-all">
 			<form wicket:id="form">
 				<div class="ui-widget-content ui-corner-all"
@@ -51,7 +78,7 @@
 							<th width="25%">City</th>
 							<th width="25%">Country</th>
 							<th width="5%">IsWorkAddress</th>
-							
+
 						</tr>
 						<tr wicket:id="address">
 							<td wicket:id="street"></td>
@@ -59,17 +86,16 @@
 							<td wicket:id="city"></td>
 							<td wicket:id="country"></td>
 							<td wicket:id="isWorkAddress"></td>
-							<td><input wicket:id="edit" type="button" wicket:message="value:edit" />
-							</td>
-							<td><input wicket:id="remove" type="button" wicket:message="value:remove" />
-							</td>
+							<td><input wicket:id="edit" type="button"
+								wicket:message="value:edit" /></td>
+							<td><input wicket:id="remove" type="button"
+								wicket:message="value:remove" /></td>
 						</tr>
 					</table>
 				</div>
-				<font color="red"><span wicket:id="feedback"></span></font>
-				
-				<br /> <input wicket:id="create" type="button" wicket:message="value:create" />
-				<br /> <br />
+				<font color="red"><span wicket:id="feedback"></span></font> <br />
+				<input wicket:id="create" type="button"
+					wicket:message="value:create" /> <br /> <br />
 			</form>
 		</div>
 		<input wicket:id="backLink" type="button" wicket:message="value:back" />

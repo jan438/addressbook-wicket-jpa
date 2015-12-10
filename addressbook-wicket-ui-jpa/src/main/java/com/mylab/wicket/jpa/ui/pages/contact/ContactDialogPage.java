@@ -1,6 +1,7 @@
 package com.mylab.wicket.jpa.ui.pages.contact;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -8,13 +9,22 @@ import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.util.ListModel;
+import org.apache.wicket.validation.validator.StringValidator;
+
 import com.googlecode.wicket.jquery.ui.form.button.AjaxButton;
+import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.jquery.ui.widget.dialog.DialogButton;
+import com.googlecode.wicket.kendo.ui.form.datetime.DatePicker;
 import com.mylab.wicket.jpa.sql.Address;
 import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.Contact;
@@ -24,11 +34,24 @@ import com.mylab.wicket.jpa.ui.pages.HomePage;
 
 public class ContactDialogPage extends WebPage {
 	private static final long serialVersionUID = 1L;
+	private static Session session;
 
 	public List<Address> addresses;
 
 	public ContactDialogPage(final Contact contact) {
-		
+
+		session = getSession();
+
+		CompoundPropertyModel<Contact> contactModel = new CompoundPropertyModel<Contact>(contact);
+		setDefaultModel(contactModel);
+
+		// Add a create Contact form to the page
+		EditContactForm editContactForm = new EditContactForm("editContactForm", contactModel);
+		add(editContactForm);
+		// Add a FeedbackPanel for displaying our messages
+
+		add(new JQueryFeedbackPanel("feedback"));
+
 		addresses = new ArrayList<Address>();
 		addresses.addAll(JPAFunctions.getAddresses(contact.getId()));
 
@@ -66,7 +89,7 @@ public class ContactDialogPage extends WebPage {
 		};
 
 		this.add(adddialog);
-		
+
 		// Dialog //
 		final AddressRemoveDialog removedialog = new AddressRemoveDialog("removedialog", "Address details") {
 
@@ -103,7 +126,7 @@ public class ContactDialogPage extends WebPage {
 				addressItem.add(new Label("city"));
 				addressItem.add(new Label("country"));
 				addressItem.add(new Label("isWorkAddress"));
-				
+
 				addressItem.add(new AjaxButton("edit") {
 
 					private static final long serialVersionUID = 5412191533847334364L;
@@ -143,21 +166,100 @@ public class ContactDialogPage extends WebPage {
 				adddialog.setTitle(target, "Create new address");
 				Address address = new Address();
 				address.setContact(contact);
-				adddialog.setModelObject(address); 
-				adddialog.open(target); 
+				adddialog.setModelObject(address);
+				adddialog.open(target);
 			}
 		});
+
 		add(backLink("backLink"));
 	}
-	
+
+	public static final class EditContactForm extends Form<Contact> {
+
+		private static final long serialVersionUID = 1L;
+
+		private TextField<String> firstNameField;
+		private TextField<String> lastNameField;
+		private DatePicker dateOfBirthField;
+		private TextField<String> mailAddressField;
+
+		public EditContactForm(final String id, IModel<Contact> contactModel) {
+			super(id, contactModel);
+
+			// Contact text fields:
+			firstNameField = new TextField<String>("firstName");
+			firstNameField.setRequired(true);
+			firstNameField.add(StringValidator.maximumLength(30));
+			add(firstNameField);
+
+			lastNameField = new TextField<String>("lastName");
+			lastNameField.setRequired(true);
+			lastNameField.add(StringValidator.maximumLength(30));
+			add(lastNameField);
+
+			dateOfBirthField = new DatePicker("dateOfBirth",
+					new PropertyModel<Date>((Contact) contactModel.getObject(), "dateOfBirth"));
+
+			dateOfBirthField.add(new BirthDayValidator());
+
+			add(dateOfBirthField);
+
+			mailAddressField = new TextField<String>("mailAddress");
+			mailAddressField.setRequired(true);
+			mailAddressField.add(StringValidator.maximumLength(30));
+			add(mailAddressField);
+
+			add(new Button("editcontactbutton", Model.of("Submit")));
+
+		}
+
+		@Override
+		public final void onSubmit() {
+
+			final Contact contact = getModelObject();
+			Date birthday = dateOfBirthField.getConvertedInput();
+			contact.setDateOfBirth(birthday);
+			String language = session.getLocale().getLanguage();
+			boolean success = JPAFunctions.query_mail_existingcontact(contact);
+			if (!success) {
+				JPAFunctions.persist_existingcontact(contact);
+				// Pass success message to next page:
+				switch (language) {
+				case "nl":
+					getSession().info("Het Contact '" + contact.getFirstName() + "' is opgeslagen!");
+					break;
+				case "de":
+					getSession().info("Der Kontact '" + contact.getFirstName() + "' ist gespeichert!");
+					break;
+				default:
+					getSession().info("The Contact '" + contact.getFirstName() + "' was saved!");
+					break;
+				}
+			} else {
+				switch (language) {
+				case "nl":
+					getSession().error("Het Contact '" + contact.getFirstName() + "' is niet opgeslagen (mailadres niet uniek)!");
+					break;
+				case "de":
+					getSession().error("Der Kontact '" + contact.getFirstName() + "' ist nicht gespeichert (mailadress nicht einzigartig)!");
+					break;
+				default:
+					getSession().error("The Contact '" + contact.getFirstName() + "' was not saved (mailaddress not unique)!");
+					break;
+				}
+			}
+		}
+	}
+
 	protected String getUserInfo(final Session session) {
 		final AddressBookUser user = ((SignInSession) session).getUser();
 		if (null != user) {
-			return "User: " + user.getUsername() + " || Role: "+ user.getRole();
+			return "User: " + user.getUsername() + " || Role: " + user.getRole();
 		} else {
 			return "No user data available.";
 		}
 	}
+
 	public static Link<Void> backLink(final String name) {
 
 		return new Link<Void>(name) {
