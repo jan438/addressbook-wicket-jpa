@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -12,6 +11,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import com.googlecode.wicket.jquery.ui.JQueryIcon;
+import com.googlecode.wicket.jquery.ui.form.RadioChoice;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.jquery.ui.widget.dialog.AbstractFormDialog;
 import com.googlecode.wicket.jquery.ui.widget.dialog.DialogButton;
@@ -35,7 +35,7 @@ abstract class AddressAddDialog extends AbstractFormDialog<Address> {
 		this.form.add(new RequiredTextField<String>("street"));
 		this.form.add(new RequiredTextField<String>("zipcode"));
 		this.form.add(new RequiredTextField<String>("city"));
-		this.form.add(new RequiredTextField<String>("country"));
+		this.form.add(new RadioChoice<String>("country", Arrays.asList("Nederland", "Amerika", "Duitsland")).setRequired(true));
 		this.form.add(new RequiredTextField<String>("isWorkAddress"));
 
 		// FeedbackPanel //
