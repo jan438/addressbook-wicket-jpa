@@ -74,8 +74,13 @@ public class ContactDialogPage extends WebPage {
 
 				if (!addresses.contains(address)) {
 					addresses.add(address);
-					JPAFunctions.persist_newaddress(address);
-					this.info(String.format("Address '%s' created", address.getStreet()));
+					boolean success = JPAFunctions.persist_newaddress(address);
+					if (success) {
+						this.info(String.format("Address '%s' created", address.getStreet()));
+					}
+					else {
+						this.error(String.format("Address '%s' not created", address.getStreet()));
+					}
 				} else {
 					JPAFunctions.persist_existingaddress(address);
 					this.info(String.format("Address '%s' updated", address.getStreet()));
