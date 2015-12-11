@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "address")
+@Table(name = "address",
+uniqueConstraints=
+@UniqueConstraint(columnNames={"street", "zipcode", "city"}))
 public class Address implements Serializable {
 
 	/**
