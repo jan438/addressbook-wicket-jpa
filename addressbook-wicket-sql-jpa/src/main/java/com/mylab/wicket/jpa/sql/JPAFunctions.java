@@ -309,16 +309,23 @@ public class JPAFunctions {
 	}
 
 	@PersistenceContext
-	public static void persist_newaddress(Address address) {
+	public static boolean persist_newaddress(Address address) {
+		boolean success = false;
 		EntityManagerFactory entityManagerFactory = Persistence
 				.createEntityManagerFactory("sampleJPALoadScriptSourcePU");
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(address);
-		Contact contact = em.find(Contact.class, address.getContact().getId());
-		em.persist(contact);
-		em.getTransaction().commit();
+		try {
+			em.persist(address);
+			Contact contact = em.find(Contact.class, address.getContact().getId());
+			em.persist(contact);
+			em.getTransaction().commit();
+			success = true;
+		} catch (Exception e) {
+			success = false;
+		}
 		em.close();
+		return success;
 	}
 
 	@PersistenceContext

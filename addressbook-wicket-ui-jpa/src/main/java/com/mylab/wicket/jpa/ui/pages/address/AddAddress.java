@@ -269,22 +269,37 @@ public class AddAddress extends WebPage {
 
 			Contact contact = getModelObject();
 			ZIPValidator zipvalidator = new ZIPValidator(session);
+			String language = getSession().getLocale().getLanguage();
 			Validatable<String> validatable = zipvalidator.validate(address.getZipcode(), address.getCountry());
 			List<IValidationError> errors = validatable.getErrors();
 			if (errors.isEmpty()) {
 				address.setContact(contact);
-				JPAFunctions.persist_newaddress(address);
-				String language = getSession().getLocale().getLanguage();
-				switch (language) {
-				case "nl":
-					getSession().info("Adres toegevoegd aan Contact '" + contact.getFirstName() + "'!");
-					break;
-				case "de":
-					getSession().info("Adress hinzugefügt an Contact '" + contact.getFirstName() + "'!");
-					break;
-				default:
-					getSession().info("Address added to Contact '" + contact.getFirstName() + "'!");
-					break;
+				boolean success;
+				success = JPAFunctions.persist_newaddress(address);
+				if (success) {
+					switch (language) {
+					case "nl":
+						getSession().info("Adres toegevoegd aan Contact '" + contact.getFirstName() + "'!");
+						break;
+					case "de":
+						getSession().info("Adress hinzugefügt an Contact '" + contact.getFirstName() + "'!");
+						break;
+					default:
+						getSession().info("Address added to Contact '" + contact.getFirstName() + "'!");
+						break;
+					}
+				} else {
+					switch (language) {
+					case "nl":
+						getSession().error("Adres niet toegevoegd aan Contact '" + contact.getFirstName() + "'!");
+						break;
+					case "de":
+						getSession().error("Adress nicht hinzugefügt an Contact '" + contact.getFirstName() + "'!");
+						break;
+					default:
+						getSession().error("Address not added to Contact '" + contact.getFirstName() + "'!");
+						break;
+					}
 				}
 				setResponsePage(new AddAddress(contact));
 			} else {
