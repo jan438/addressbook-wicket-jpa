@@ -6,13 +6,13 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.ListChoice;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import com.googlecode.wicket.jquery.ui.JQueryIcon;
-import com.googlecode.wicket.jquery.ui.form.RadioChoice;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.jquery.ui.widget.dialog.AbstractFormDialog;
 import com.googlecode.wicket.jquery.ui.widget.dialog.DialogButton;
@@ -22,7 +22,7 @@ abstract class AddressAddDialog extends AbstractFormDialog<Address> {
 	private static final long serialVersionUID = 1L;
 	protected final DialogButton btnSubmit = new DialogButton(SUBMIT, "Save", JQueryIcon.CHECK);
 	protected final DialogButton btnCancel = new DialogButton(CANCEL, LBL_CANCEL, JQueryIcon.CANCEL);
-
+	private static final List<String> COUNTRIES = Arrays.asList("Nederland", "Amerika", "Duitsland");
 	private Form<?> form;
 	private FeedbackPanel feedback;
 
@@ -36,7 +36,7 @@ abstract class AddressAddDialog extends AbstractFormDialog<Address> {
 		this.form.add(new RequiredTextField<String>("street"));
 		this.form.add(new RequiredTextField<String>("zipcode"));
 		this.form.add(new RequiredTextField<String>("city"));
-		this.form.add(new RadioChoice<String>("country", Arrays.asList("Nederland", "Amerika", "Duitsland")).setRequired(true));
+		this.form.add(new ListChoice<>("country", COUNTRIES));
 		this.form.add(new CheckBox("isWorkAddress"));
 
 		// FeedbackPanel //

@@ -36,12 +36,15 @@ th, td {
 				</tr>
 				<tr>
 					<td width="30%"><wicket:message key="country">Country:*</wicket:message></td>
-					<td width="70%"><div wicket:id="country"></div></td>
+					<td width="70%"><select wicket:id="country">
+							<option>foo</option>
+							<option>bar</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td width="30%"><wicket:message key="workaddress">Work Address:</wicket:message></td>
-					<td width="70%"><input wicket:id="isWorkAddress" type="checkbox"
-						style="width: 100%;"></input></td>
+					<td width="70%"><input wicket:id="isWorkAddress"
+						type="checkbox" style="width: 100%;"></input></td>
 				</tr>
 			</table>
 			<div wicket:id="feedback"></div>
