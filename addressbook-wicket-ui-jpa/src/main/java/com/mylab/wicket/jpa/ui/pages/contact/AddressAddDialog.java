@@ -1,5 +1,6 @@
 package com.mylab.wicket.jpa.ui.pages.contact;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -17,12 +18,16 @@ import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import com.googlecode.wicket.jquery.ui.widget.dialog.AbstractFormDialog;
 import com.googlecode.wicket.jquery.ui.widget.dialog.DialogButton;
 import com.mylab.wicket.jpa.sql.Address;
+import com.mylab.wicket.jpa.ui.pages.select2.Country_de;
+import com.mylab.wicket.jpa.ui.pages.select2.Country_nl;
+import com.mylab.wicket.jpa.ui.pages.select2.Country_us;
 
 abstract class AddressAddDialog extends AbstractFormDialog<Address> {
 	private static final long serialVersionUID = 1L;
 	protected final DialogButton btnSubmit = new DialogButton(SUBMIT, "Save", JQueryIcon.CHECK);
 	protected final DialogButton btnCancel = new DialogButton(CANCEL, LBL_CANCEL, JQueryIcon.CANCEL);
-	private static final List<String> COUNTRIES = Arrays.asList("Nederland", "Amerika", "Duitsland");
+	private static List<String> COUNTRIES;
+
 	private Form<?> form;
 	private FeedbackPanel feedback;
 
@@ -31,6 +36,25 @@ abstract class AddressAddDialog extends AbstractFormDialog<Address> {
 
 		this.form = new Form<Address>("form", new CompoundPropertyModel<Address>(this.getModel()));
 		this.add(this.form);
+		COUNTRIES = new ArrayList<>();
+		String language = getSession().getLocale().getLanguage();
+		switch (language) {
+		case "nl":
+			for (Country_nl country : Country_nl.values()) {
+				COUNTRIES.add(country.getDisplayName());
+			}
+			break;
+		case "de":
+			for (Country_de country : Country_de.values()) {
+				COUNTRIES.add(country.getDisplayName());
+			}
+			break;
+		default:
+			for (Country_us country : Country_us.values()) {
+				COUNTRIES.add(country.getDisplayName());
+			}
+			break;
+		}
 
 		// Slider //
 		this.form.add(new RequiredTextField<String>("street"));
