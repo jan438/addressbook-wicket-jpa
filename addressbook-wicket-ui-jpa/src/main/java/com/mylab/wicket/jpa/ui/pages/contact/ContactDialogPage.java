@@ -17,6 +17,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.util.ListModel;
+import org.apache.wicket.validation.IValidationError;
+import org.apache.wicket.validation.Validatable;
 import org.apache.wicket.validation.validator.StringValidator;
 
 import com.googlecode.wicket.jquery.ui.form.button.AjaxButton;
@@ -31,6 +33,7 @@ import com.mylab.wicket.jpa.sql.Contact;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignInSession;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
+import com.mylab.wicket.jpa.ui.pages.address.ZIPValidator;
 
 public class ContactDialogPage extends WebPage {
 	private static final long serialVersionUID = 1L;
@@ -71,19 +74,24 @@ public class ContactDialogPage extends WebPage {
 			@Override
 			public void onSubmit(AjaxRequestTarget target) {
 				Address address = this.getModelObject();
-
-				if (!addresses.contains(address)) {
-					addresses.add(address);
-					boolean success = JPAFunctions.persist_newaddress(address);
-					if (success) {
-						this.info(String.format("Address '%s' created", address.getStreet()));
-					}
-					else {
-						this.error(String.format("Address '%s' not created", address.getStreet()));
+				ZIPValidator zipvalidator = new ZIPValidator(session);
+				Validatable<String> validatable = zipvalidator.validate(address.getZipcode(), address.getCountry());
+				List<IValidationError> errors = validatable.getErrors();
+				if (errors.isEmpty()) {
+					if (!addresses.contains(address)) {
+						addresses.add(address);
+						boolean success = JPAFunctions.persist_newaddress(address);
+						if (success) {
+							this.info(String.format("Address '%s' created", address.getStreet()));
+						} else {
+							this.error(String.format("Address '%s' not created", address.getStreet()));
+						}
+					} else {
+						JPAFunctions.persist_existingaddress(address);
+						this.info(String.format("Address '%s' updated", address.getStreet()));
 					}
 				} else {
-					JPAFunctions.persist_existingaddress(address);
-					this.info(String.format("Address '%s' updated", address.getStreet()));
+					this.error(String.format("Address '%s' has ZIP errors", address.getStreet()));
 				}
 			}
 
@@ -243,13 +251,16 @@ public class ContactDialogPage extends WebPage {
 			} else {
 				switch (language) {
 				case "nl":
-					getSession().error("Het Contact '" + contact.getFirstName() + "' is niet opgeslagen (mailadres niet uniek)!");
+					getSession().error(
+							"Het Contact '" + contact.getFirstName() + "' is niet opgeslagen (mailadres niet uniek)!");
 					break;
 				case "de":
-					getSession().error("Der Kontact '" + contact.getFirstName() + "' ist nicht gespeichert (mailadress nicht einzigartig)!");
+					getSession().error("Der Kontact '" + contact.getFirstName()
+							+ "' ist nicht gespeichert (mailadress nicht einzigartig)!");
 					break;
 				default:
-					getSession().error("The Contact '" + contact.getFirstName() + "' was not saved (mailaddress not unique)!");
+					getSession().error(
+							"The Contact '" + contact.getFirstName() + "' was not saved (mailaddress not unique)!");
 					break;
 				}
 			}
