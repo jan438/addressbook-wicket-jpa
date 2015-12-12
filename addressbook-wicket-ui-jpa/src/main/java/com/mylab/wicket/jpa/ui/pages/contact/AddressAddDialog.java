@@ -60,7 +60,7 @@ abstract class AddressAddDialog extends AbstractFormDialog<Address> {
 		this.form.add(new RequiredTextField<String>("street"));
 		this.form.add(new RequiredTextField<String>("zipcode"));
 		this.form.add(new RequiredTextField<String>("city"));
-		this.form.add(new ListChoice<>("country", COUNTRIES));
+		this.form.add(new ListChoice<>("country", COUNTRIES).setRequired(true));
 		this.form.add(new CheckBox("isWorkAddress"));
 
 		// FeedbackPanel //
