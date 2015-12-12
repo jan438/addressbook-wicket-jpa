@@ -220,7 +220,6 @@ public class JPAFunctions {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		em.getTransaction().begin();
 		Contact contact = em.find(Contact.class, dbcontact.getId());
-		contact.setAddresses(dbcontact.getAddresses());
 		contact.setDateOfBirth(dbcontact.getDateOfBirth());
 		contact.setMailAddress(dbcontact.getMailAddress());
 		contact.setFirstName(dbcontact.getFirstName());
