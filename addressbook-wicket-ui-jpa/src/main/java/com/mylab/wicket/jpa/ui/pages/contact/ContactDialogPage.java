@@ -59,8 +59,8 @@ public class ContactDialogPage extends WebPage {
 		addresses = new ArrayList<Address>();
 		addresses.addAll(JPAFunctions.getAddresses(contact.getId()));
 
-		final Form<List<Address>> form = new Form<List<Address>>("form", new ListModel<>(this.addresses));
-		this.add(form);
+		final Form<List<Address>> form = new Form<List<Address>>("form", new ListModel<>(addresses));
+		add(form);
 
 		add(new Label("userInfo", getUserInfo(getSession())));
 
@@ -74,7 +74,7 @@ public class ContactDialogPage extends WebPage {
 
 			@Override
 			public void onSubmit(AjaxRequestTarget target) {
-				Address address = this.getModelObject();
+				Address address = getModelObject();
 				ZIPValidator zipvalidator = new ZIPValidator(session);
 				Validatable<String> validatable = zipvalidator.validate(address.getZipcode(), address.getCountry());
 				List<IValidationError> errors = validatable.getErrors();
@@ -83,16 +83,16 @@ public class ContactDialogPage extends WebPage {
 						addresses.add(address);
 						boolean success = JPAFunctions.persist_newaddress(address);
 						if (success) {
-							this.info(String.format("Address '%s' created", address.getStreet()));
+							info(String.format("Address '%s' created", address.getStreet()));
 						} else {
-							this.error(String.format("Address '%s' not created", address.getStreet()));
+							error(String.format("Address '%s' not created", address.getStreet()));
 						}
 					} else {
 						JPAFunctions.persist_existingaddress(address);
-						this.info(String.format("Address '%s' updated", address.getStreet()));
+						info(String.format("Address '%s' updated", address.getStreet()));
 					}
 				} else {
-					this.error(String.format("Address '%s' has ZIP errors", address.getStreet()));
+					error(String.format("Address '%s' has ZIP errors", address.getStreet()));
 				}
 			}
 
@@ -102,7 +102,7 @@ public class ContactDialogPage extends WebPage {
 			}
 		};
 
-		this.add(adddialog);
+		add(adddialog);
 
 		// Dialog //
 		final AddressRemoveDialog removedialog = new AddressRemoveDialog("removedialog", "Address details") {
@@ -111,10 +111,10 @@ public class ContactDialogPage extends WebPage {
 
 			@Override
 			public void onSubmit(AjaxRequestTarget target) {
-				Address address = this.getModelObject();
+				Address address = getModelObject();
 
 				if (addresses.contains(address)) {
-					this.info(String.format("Address '%s' removed", address.getStreet()));
+					info(String.format("Address '%s' removed", address.getStreet()));
 					addresses.remove(address);
 					JPAFunctions.remove_address(address.getId());
 				}
@@ -126,7 +126,7 @@ public class ContactDialogPage extends WebPage {
 			}
 		};
 
-		this.add(removedialog);
+		add(removedialog);
 
 		// ListView //
 		form.add(new PropertyListView<Address>("address", form.getModel()) {
