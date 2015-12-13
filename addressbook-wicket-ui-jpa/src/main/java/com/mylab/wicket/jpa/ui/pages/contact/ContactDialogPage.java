@@ -8,6 +8,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -138,7 +139,7 @@ public class ContactDialogPage extends WebPage {
 				addressItem.add(new Label("zipcode"));
 				addressItem.add(new Label("city"));
 				addressItem.add(new Label("country"));
-				addressItem.add(new Label("isWorkAddress"));
+				addressItem.add(new CheckBox("isWorkAddress"));
 
 				addressItem.add(new AjaxButton("edit") {
 
