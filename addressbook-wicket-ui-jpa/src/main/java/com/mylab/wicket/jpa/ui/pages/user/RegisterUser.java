@@ -2,6 +2,8 @@ package com.mylab.wicket.jpa.ui.pages.user;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.googlecode.wicket.jquery.core.Options;
 import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import org.apache.wicket.markup.html.WebPage;
@@ -16,6 +18,7 @@ import com.mylab.wicket.jpa.sql.AddressBookUser;
 import com.mylab.wicket.jpa.sql.JPAFunctions;
 import com.mylab.wicket.jpa.ui.application.SignIn;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
+import com.googlecode.wicket.jquery.ui.widget.tooltip.TooltipBehavior;
 
 public class RegisterUser extends WebPage {
 
@@ -29,7 +32,13 @@ public class RegisterUser extends WebPage {
 	 *
 	 */
 	public RegisterUser() {
+		
+		Options options = new Options();
+		options.set("position", "{ my: 'center top+3', at: 'center bottom' }");
+//		options.set("track",true); //used to track the mouse
 
+		add(new TooltipBehavior(options));
+		
 		AddressBookUser u = new AddressBookUser();
 		CompoundPropertyModel<AddressBookUser> userModel = new CompoundPropertyModel<AddressBookUser>(u);
 		setDefaultModel(userModel);
