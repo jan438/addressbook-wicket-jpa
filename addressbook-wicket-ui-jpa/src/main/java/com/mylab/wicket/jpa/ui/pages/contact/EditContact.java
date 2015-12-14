@@ -67,11 +67,8 @@ public class EditContact extends WebPage {
 
 		final PageableListView<Address> listView;
 
-		add(listView = new PageableListView<Address>("addressList", addresses, 10) {
+		add(listView = new PageableListView<Address>("addressList", addresses, 2) {
 
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -152,14 +149,9 @@ public class EditContact extends WebPage {
 	public static Link<Void> backLink(final String name) {
 
 		return new Link<Void>(name) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
-			/**
-			 * @see org.apache.wicket.markup.html.link.Link#onClick()
-			 */
 			@Override
 			public void onClick() {
 				setResponsePage(new HomePage());
@@ -170,14 +162,9 @@ public class EditContact extends WebPage {
 	public static Link<Void> addAddressLink(final String name, final Contact contact) {
 
 		return new Link<Void>(name) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
-			/**
-			 * @see org.apache.wicket.markup.html.link.Link#onClick()
-			 */
 			@Override
 			public void onClick() {
 				setResponsePage(new AddAddress(contact));
@@ -188,14 +175,9 @@ public class EditContact extends WebPage {
 	public static Link<Void> removeAddressLink(final String name, final Address address) {
 
 		return new Link<Void>(name) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
-			/**
-			 * @see org.apache.wicket.markup.html.link.Link#onClick()
-			 */
 			@Override
 			public void onClick() {
 				setResponsePage(new RemoveConfirmation(address, address.getStreet()));
@@ -205,9 +187,6 @@ public class EditContact extends WebPage {
 
 	public static class UpdateAddressForm extends Form<Address> {
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 
 		public UpdateAddressForm(String id, IModel<Address> addressModel, Contact contact) {
@@ -306,13 +285,16 @@ public class EditContact extends WebPage {
 			} else {
 				switch (language) {
 				case "nl":
-					getSession().error("Het Contact '" + contact.getFirstName() + "' is niet opgeslagen (mailadres niet uniek)!");
+					getSession().error(
+							"Het Contact '" + contact.getFirstName() + "' is niet opgeslagen (mailadres niet uniek)!");
 					break;
 				case "de":
-					getSession().error("Der Kontact '" + contact.getFirstName() + "' ist nicht gespeichert (mailadress nicht einzigartig)!");
+					getSession().error("Der Kontact '" + contact.getFirstName()
+							+ "' ist nicht gespeichert (mailadress nicht einzigartig)!");
 					break;
 				default:
-					getSession().error("The Contact '" + contact.getFirstName() + "' was not saved (mailaddress not unique)!");
+					getSession().error(
+							"The Contact '" + contact.getFirstName() + "' was not saved (mailaddress not unique)!");
 					break;
 				}
 			}
