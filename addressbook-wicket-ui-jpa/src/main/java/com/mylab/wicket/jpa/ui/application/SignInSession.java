@@ -40,7 +40,7 @@ public final class SignInSession extends AuthenticatedWebSession {
 		List<AddressBookUser> users = em.createNamedQuery("findAllUsersWithName")
 	            .setParameter("username", username)
 	            .getResultList();
-		if (users != null) {
+		if ((users != null) && !users.isEmpty()) {
 			user = users.get(0);
 			System.out.println("user with name " + user.getUsername() + " found");
 		} else {
