@@ -25,6 +25,7 @@ import com.mylab.wicket.jpa.ui.pages.HomePage;
 import com.googlecode.wicket.jquery.ui.form.button.Button;
 import com.googlecode.wicket.jquery.ui.markup.html.link.Link;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
+import com.googlecode.wicket.kendo.ui.widget.tooltip.TooltipBehavior;
 
 public class MailContact extends WebPage {
 
@@ -43,7 +44,10 @@ public class MailContact extends WebPage {
 
 		// Add comment form
 		add(new MailContactForm("mailContactForm"));
-
+		// label 2 //
+		final Label label = new Label("label", "Mails will be sent to janboon438@gmail.com");
+		add(label);
+		label.add(new TooltipBehavior(Model.of("Please make it no longer than 100 characters!")));
 		// Add commentListView of existing comments
 		add(new PropertyListView<Comment>("comments", commentList) {
 			private static final long serialVersionUID = 1L;
