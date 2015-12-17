@@ -33,8 +33,8 @@ public class UserDialogPage extends WebPage {
 		users = new ArrayList<AddressBookUser>();
 		users.addAll(JPAFunctions.getAllUsers());
 
-		final Form<List<AddressBookUser>> form = new Form<List<AddressBookUser>>("form", new ListModel<>(this.users));
-		this.add(form);
+		final Form<List<AddressBookUser>> form = new Form<List<AddressBookUser>>("form", new ListModel<>(users));
+		add(form);
 
 		add(new Label("userInfo", getUserInfo(getSession())));
 
@@ -48,15 +48,15 @@ public class UserDialogPage extends WebPage {
 
 			@Override
 			public void onSubmit(AjaxRequestTarget target) {
-				AddressBookUser user = this.getModelObject();
+				AddressBookUser user = getModelObject();
 
 				if (!users.contains(user)) {
 					users.add(user);
 					JPAFunctions.persist_newuser(user);
-					this.info(String.format("User '%s' created", user.getUsername()));
+					info(String.format("User '%s' created", user.getUsername()));
 				} else {
 					JPAFunctions.persist_existinguser(user);
-					this.info(String.format("User '%s' updated", user.getUsername()));
+					info(String.format("User '%s' updated", user.getUsername()));
 				}
 			}
 
@@ -66,7 +66,7 @@ public class UserDialogPage extends WebPage {
 			}
 		};
 
-		this.add(adddialog);
+		add(adddialog);
 		
 		// Dialog //
 		final UserRemoveDialog removedialog = new UserRemoveDialog("removedialog", "User details") {
@@ -75,10 +75,10 @@ public class UserDialogPage extends WebPage {
 
 			@Override
 			public void onSubmit(AjaxRequestTarget target) {
-				AddressBookUser user = this.getModelObject();
+				AddressBookUser user = getModelObject();
 
 				if (users.contains(user)) {
-					this.info(String.format("User '%s' removed", user.getUsername()));
+					info(String.format("User '%s' removed", user.getUsername()));
 					users.remove(user);
 					JPAFunctions.remove_user(user.getId());
 				}
@@ -90,7 +90,7 @@ public class UserDialogPage extends WebPage {
 			}
 		};
 
-		this.add(removedialog);
+		add(removedialog);
 
 		// ListView //
 		form.add(new PropertyListView<AddressBookUser>("user", form.getModel()) {
@@ -157,14 +157,9 @@ public class UserDialogPage extends WebPage {
 	public static Link<Void> backLink(final String name) {
 
 		return new Link<Void>(name) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
-			/**
-			 * @see org.apache.wicket.markup.html.link.Link#onClick()
-			 */
 			@Override
 			public void onClick() {
 				setResponsePage(new HomePage());
