@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
-	<wicket:head>
-		<style type="text/css">
-			table#dialog-table {
-				width: 100%;
-				border-spacing: 0;
-				border-collapse: collapse;
-			}
+<wicket:head>
+	<style type="text/css">
+table#dialog-table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
 
-			th, td {
-				padding: 5px;
-			}
-		</style>
-	</wicket:head>
+th, td {
+	padding: 5px;
+}
+</style>
+</wicket:head>
 </head>
 <body>
 	<wicket:panel>
@@ -37,7 +37,11 @@
 				</tr>
 				<tr>
 					<td width="30%">IsWorkAddress:</td>
-					<td width="70%"><span wicket:id="isWorkAddress" style="width: 100%;"></span></td>
+					<td width="70%"><td><input wicket:id="isWorkAddress" type="checkbox"
+						onclick="return false;" readonly="readonly" /></td></td>
+
+
+
 				</tr>
 			</table>
 			<div wicket:id="feedback"></div>

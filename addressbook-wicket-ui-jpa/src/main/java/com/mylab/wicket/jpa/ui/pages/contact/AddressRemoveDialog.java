@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -36,7 +37,7 @@ abstract class AddressRemoveDialog extends AbstractFormDialog<Address> {
 		this.form.add(new Label("zipcode"));
 		this.form.add(new Label("city"));
 		this.form.add(new Label("country"));
-		this.form.add(new Label("isWorkAddress"));
+		this.form.add(new CheckBox("isWorkAddress"));
 
 		// FeedbackPanel //
 		this.feedback = new JQueryFeedbackPanel("feedback");
