@@ -4,6 +4,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 
+import com.googlecode.wicket.jquery.ui.plugins.emoticons.EmoticonsBehavior;
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 
 public class NotAllowedPage extends WebPage {
@@ -22,7 +23,9 @@ public class NotAllowedPage extends WebPage {
 		default:
 		    add(new Label("notification", "You are not allowed to view this page!"));
 			break;
-		}		
+		}
+		
+		add(new EmoticonsBehavior("#notification"));
 	    
 	    add(new Link<Void>("back"){
         	/**
