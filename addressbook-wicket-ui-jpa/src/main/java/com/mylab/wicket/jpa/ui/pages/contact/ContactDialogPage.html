@@ -67,39 +67,37 @@
 		<h3>
 			<wicket:message key="editcontactaddresses">Edit Contact Addresses</wicket:message>
 		</h3>
-		<div id="wrapper-panel-frame" class="ui-corner-all">
-			<form wicket:id="form">
-				<div class="ui-widget-content ui-corner-all">
-					<table>
-						<tr>
-							<th width="20%">Street</th>
-							<th width="10%">Zipcode</th>
-							<th width="20%">City</th>
-							<th width="20%">Country</th>
-							<th width="10%">Is<br>Work<br>Address
-							</th>
-							<th width="10%"></th>
-							<th width="10%"></th>
-						</tr>
-						<tr wicket:id="address">
-							<td wicket:id="street"></td>
-							<td wicket:id="zipcode"></td>
-							<td wicket:id="city"></td>
-							<td wicket:id="country"></td>
-							<td><input wicket:id="isWorkAddress" type="checkbox"
-								onclick="return false;" readonly="readonly" /></td>
-							<td><input wicket:id="edit" type="button"
-								wicket:message="value:edit" /></td>
-							<td><input wicket:id="remove" type="button"
-								wicket:message="value:remove" /></td>
-						</tr>
-					</table>
-				</div>
-				<font color="red"><span wicket:id="feedback1"></span></font> <br />
-				<input wicket:id="create" type="button"
-					wicket:message="value:create" /> <br /> <br />
-			</form>
-		</div>
+		<form wicket:id="form">
+			<fieldset>
+				<table>
+					<tr>
+						<th width="20%">Street</th>
+						<th width="10%">Zipcode</th>
+						<th width="20%">City</th>
+						<th width="20%">Country</th>
+						<th width="10%">Is<br>Work<br>Address
+						</th>
+						<th width="10%"></th>
+						<th width="10%"></th>
+					</tr>
+					<tr wicket:id="address">
+						<td wicket:id="street"></td>
+						<td wicket:id="zipcode"></td>
+						<td wicket:id="city"></td>
+						<td wicket:id="country"></td>
+						<td><input wicket:id="isWorkAddress" type="checkbox"
+							onclick="return false;" readonly="readonly" /></td>
+						<td><input wicket:id="edit" type="button"
+							wicket:message="value:edit" /></td>
+						<td><input wicket:id="remove" type="button"
+							wicket:message="value:remove" /></td>
+					</tr>
+				</table>
+			</fieldset>
+			<font color="red"><span wicket:id="feedback1"></span></font> <br />
+			<input wicket:id="create" type="button" wicket:message="value:create" />
+			<br /> <br />
+		</form>
 		<input wicket:id="backLink" type="button" wicket:message="value:back" />
 		<div wicket:id="adddialog">[adddialog]</div>
 		<div wicket:id="removedialog">[removedialog]</div>
