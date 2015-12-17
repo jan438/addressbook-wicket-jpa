@@ -26,31 +26,22 @@ import org.apache.wicket.markup.html.basic.Label;
 //@AuthorizeAction(action = "RENDER", roles = {"ADMIN"})
 public class EditUsers extends WebPage {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static CompoundPropertyModel<AddressBookUser> userCompoundPropModel;
 
 	public EditUsers() {
 
-		// Show user's name and role:
 		add(new Label("userInfo", getUserInfo(getSession())));
 
-		// Add a FeedbackPanel for displaying our messages
-		// FeedbackPanel //
 		add(new JQueryFeedbackPanel("feedback"));
-		
+
 		List<AddressBookUser> userList = new ArrayList<AddressBookUser>();
 		userList.addAll(JPAFunctions.getAllUsers());
 
 		final PageableListView<AddressBookUser> listView;
 
-		add(listView = new PageableListView<AddressBookUser>("userList", userList, 10) {
+		add(listView = new PageableListView<AddressBookUser>("userList", userList, 2) {
 
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -91,7 +82,7 @@ public class EditUsers extends WebPage {
 
 				final SignInSession session = (SignInSession) getSession();
 				final AddressBookUser userInSession = session.getUser();
-				
+
 				// Add a link to remove the chosen user if it's not the current
 				// active user
 				if (u.getUsername().equalsIgnoreCase(userInSession.getUsername())) {
@@ -111,11 +102,11 @@ public class EditUsers extends WebPage {
 		add(backLink("backLink"));
 
 	}
-	
+
 	protected String getUserInfo(final Session session) {
 		final AddressBookUser user = ((SignInSession) session).getUser();
 		if (null != user) {
-			return "User: " + user.getUsername() + " || Role: "+ user.getRole();
+			return "User: " + user.getUsername() + " || Role: " + user.getRole();
 		} else {
 			return "No user data available.";
 		}
@@ -124,14 +115,9 @@ public class EditUsers extends WebPage {
 	public static Link<Void> backLink(final String name) {
 
 		return new Link<Void>(name) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
-			/**
-			 * @see org.apache.wicket.markup.html.link.Link#onClick()
-			 */
 			@Override
 			public void onClick() {
 				setResponsePage(new HomePage());
@@ -142,14 +128,9 @@ public class EditUsers extends WebPage {
 	public static Link<Void> removeUserLink(final String name, final AddressBookUser u) {
 
 		return new Link<Void>(name) {
-			/**
-			 * 
-			 */
+
 			private static final long serialVersionUID = 1L;
 
-			/**
-			 * @see org.apache.wicket.markup.html.link.Link#onClick()
-			 */
 			@Override
 			public void onClick() {
 				JPAFunctions.remove_user(u.getId());
@@ -173,9 +154,6 @@ public class EditUsers extends WebPage {
 
 	public static class UpdateUserForm extends Form<AddressBookUser> {
 
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 
 		public UpdateUserForm(String id, IModel<AddressBookUser> userModel) {
@@ -186,8 +164,10 @@ public class EditUsers extends WebPage {
 		public void onSubmit() {
 			final AddressBookUser u = getModelObject();
 			boolean success = JPAFunctions.query_name_user(u.getUsername());
-			if (!success) JPAFunctions.persist_newuser(u);
-			else JPAFunctions.persist_existinguser(u);
+			if (!success)
+				JPAFunctions.persist_newuser(u);
+			else
+				JPAFunctions.persist_existinguser(u);
 
 			// A message stored with getSession().info("...") gets automatically
 			// picked up by the target page's feedback panel:
@@ -205,6 +185,5 @@ public class EditUsers extends WebPage {
 			}
 			setResponsePage(new EditUsers());
 		}
-
 	}
 }
