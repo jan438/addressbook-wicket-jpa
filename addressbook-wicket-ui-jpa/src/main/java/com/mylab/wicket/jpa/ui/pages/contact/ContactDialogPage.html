@@ -73,19 +73,22 @@
 					style="width: 550px; min-height: 120px; border: 1px solid #336699;">
 					<table>
 						<tr>
-							<th width="25%">Street</th>
-							<th width="20%">Zipcode</th>
-							<th width="25%">City</th>
-							<th width="25%">Country</th>
-							<th width="5%">IsWorkAddress</th>
-
+							<th width="20%">Street</th>
+							<th width="10%">Zipcode</th>
+							<th width="20%">City</th>
+							<th width="20%">Country</th>
+							<th width="10%">Is<br>Work<br>Address
+							</th>
+							<th width="10%"></th>
+							<th width="10%"></th>
 						</tr>
 						<tr wicket:id="address">
 							<td wicket:id="street"></td>
 							<td wicket:id="zipcode"></td>
 							<td wicket:id="city"></td>
 							<td wicket:id="country"></td>
-							<td><input wicket:id="isWorkAddress" type="checkbox" onclick="return false;" readonly="readonly" /></td>
+							<td><input wicket:id="isWorkAddress" type="checkbox"
+								onclick="return false;" readonly="readonly" /></td>
 							<td><input wicket:id="edit" type="button"
 								wicket:message="value:edit" /></td>
 							<td><input wicket:id="remove" type="button"
