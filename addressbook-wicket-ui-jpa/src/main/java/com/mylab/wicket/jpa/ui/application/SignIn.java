@@ -25,11 +25,10 @@ import com.mylab.wicket.jpa.ui.pages.user.RegisterUser;
 
 public final class SignIn extends WebPage {
 
-
 	private static final long serialVersionUID = 1L;
 
 	/** Relevant locales wrapped in a list. */
-	public static final List<Locale> LOCALES = Arrays.asList(new Locale("nl", "NL"), Locale.ENGLISH,  Locale.GERMAN);
+	public static final List<Locale> LOCALES = Arrays.asList(new Locale("nl", "NL"), Locale.ENGLISH, Locale.GERMAN);
 
 	private KittenCaptchaPanel captcha;
 	private int errors;
@@ -101,7 +100,8 @@ public final class SignIn extends WebPage {
 		 */
 		@Override
 		protected boolean wantOnSelectionChangedNotifications() {
-			// we want roundtrips when a the AddressBookUser selects another item
+			// we want roundtrips when a the AddressBookUser selects another
+			// item
 			return true;
 		}
 	}
@@ -119,10 +119,10 @@ public final class SignIn extends WebPage {
 	public SignIn() {
 		// Create feedback panel and add to page
 		add(new JQueryFeedbackPanel("feedback"));
-		
+
 		// Add register button:
 		add(registerUserLink("registerUser"));
-		
+
 		// Check if there already is a session:
 		if (session.isSignedIn()) {
 			// set feedback message and go to HomePage:
@@ -152,7 +152,7 @@ public final class SignIn extends WebPage {
 			}
 		};
 	}
-	
+
 	boolean isSpamBot() {
 		return errors > 3;
 	}
@@ -274,6 +274,9 @@ public final class SignIn extends WebPage {
 					String errmsg = getString("loginError", null, "Login failed!");
 					error(errmsg);
 				}
+			} else {
+				String errmsg = getString("loginError", null, "Please check the kittens first!");
+				error(errmsg);
 			}
 		}
 	}
