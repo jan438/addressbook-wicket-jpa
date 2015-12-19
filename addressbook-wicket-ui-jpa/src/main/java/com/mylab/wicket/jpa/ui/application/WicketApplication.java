@@ -6,10 +6,12 @@ import org.apache.wicket.authorization.IUnauthorizedComponentInstantiationListen
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.filter.JavaScriptFilteredIntoFooterHeaderResponse;
+import org.apache.wicket.markup.html.IHeaderResponseDecorator;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
-
 import com.mylab.wicket.jpa.ui.pages.error.ExpiredPage;
 import com.mylab.wicket.jpa.ui.pages.error.NotAllowedPage;
 
@@ -65,6 +67,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
     public void init() {
     	
         super.init();
+		setHeaderResponseDecorator(new JavaScriptToBucketResponseDecorator("footer-container"));
 
         // Register the authorization strategy 
         getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
@@ -82,6 +85,26 @@ public class WicketApplication extends AuthenticatedWebApplication {
         
         // Turn off Ajax debug settings in browser:
         getDebugSettings().setAjaxDebugModeEnabled(false); 
+    }
+    
+	/**
+     * Decorates an original {@link org.apache.wicket.markup.head.IHeaderResponse} and renders all javascript items
+     * (JavaScriptHeaderItem), to a specific container in the page.
+     */
+    static class JavaScriptToBucketResponseDecorator implements IHeaderResponseDecorator 
+    {
+
+        private String bucketName;
+
+        public JavaScriptToBucketResponseDecorator(String bucketName) {
+            this.bucketName = bucketName;
+        }
+
+        @Override
+        public IHeaderResponse decorate(IHeaderResponse response) {
+            return new JavaScriptFilteredIntoFooterHeaderResponse(response, bucketName);
+        }
+
     }
 
 }

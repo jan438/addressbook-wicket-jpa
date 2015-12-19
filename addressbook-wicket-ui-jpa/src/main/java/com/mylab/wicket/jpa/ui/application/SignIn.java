@@ -11,6 +11,10 @@ import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.captcha.kittens.KittenCaptchaPanel;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.OnEventHeaderItem;
+import org.apache.wicket.markup.head.filter.HeaderResponseContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -20,6 +24,8 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.http.WebRequest;
+import org.apache.wicket.request.resource.PackageResourceReference;
+
 import com.mylab.wicket.jpa.ui.pages.HomePage;
 import com.mylab.wicket.jpa.ui.pages.user.RegisterUser;
 
@@ -39,7 +45,14 @@ public final class SignIn extends WebPage {
 			getSession().setLocale(locale);
 		}
 	}
+	
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        response.render(JavaScriptHeaderItem.forReference(new PackageResourceReference(getClass(),
+                "javasciptLibrary.js")));
 
+        response.render(OnEventHeaderItem.forScript("'logo'", "click", "alert('Clicked me!')"));
+    }
 	/**
 	 * Choice for a locale.
 	 */
@@ -117,6 +130,9 @@ public final class SignIn extends WebPage {
 	 * Page Constructor
 	 */
 	public SignIn() {
+		
+        add(new HeaderResponseContainer("footer-container", "footer-container"));
+
 		// Create feedback panel and add to page
 		add(new JQueryFeedbackPanel("feedback"));
 
